@@ -6,6 +6,8 @@ const cookieParser = require("cookie-parser");
 const compression = require("compression");
 const fileupload = require("express-fileupload");
 const cors = require("cors");
+const routes = require("./routes/index");
+const createHttpError = require("http-errors");
 
 const app = express();
 
@@ -40,8 +42,23 @@ app.use(
 //cors
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("hello there this a CTF Project");
+//routes
+app.use("/", routes);
+
+//Handling 404 Not Found Status
+app.use(async (res, req, next) => {
+  next(createHttpError.NotFound("This route doesn't exist"));
+});
+
+//handling http errors
+app.use(async (err, req, res, next) => {
+  res.status(err.status || 500);
+  res.send({
+    error: {
+      status: err.status || 500,
+      message: err.message,
+    },
+  });
 });
 
 module.exports = app;
