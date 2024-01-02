@@ -16,12 +16,29 @@
   }
 }
 
+.nav_items {
+  margin-right: 14px;
+  color: #ffffff8c;
+  cursor: pointer;
+  transition: color 0.2s;
+  -webkit-transition: color 0.2s;
+}
+.nav_items:hover {
+  color: #ffffffbf;
+}
+
+.fontlato {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.inputfocus:focus {
+  background-color: transparent;
+  border-color: #a3d39c;
+  box-shadow: 0 0 0 0.1rem #a3d39c;
+  background: #fff;
+}
+
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #fff;
+  overflow-x: hidden;
 }

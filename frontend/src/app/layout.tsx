@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import NextTopLoader from "nextjs-toploader";
+//
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/redux/Provider";
@@ -18,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <NextTopLoader color="#9fef00" height={2} />
         <Providers>{children}</Providers>
       </body>
     </html>
