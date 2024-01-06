@@ -1,25 +1,19 @@
 "use client";
 
-import { logout } from "@/redux/features/userSlice";
-import { useAppDispatch } from "@/redux/hooks";
-import axios from "axios";
+import LoggedinNavbar from "@/components/navbar/LoggedinNavbar";
+import { Lato } from "next/font/google";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
+import Navbar from "@/components/navbar/Navbar";
+
+const lato = Lato({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    dispatch(logout());
-    Cookies.remove("usertoken");
-    await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/logout`);
-    router.push("/login");
-  };
+  const userCookie = Cookies.get("usertoken");
   return (
-    <div>
-      <button onClick={handleLogout}>LogOut</button>
-      <h1>welcome Home</h1>
+    <div className="h-screen w-screen bg-[#1a1c22] overflow-y-hidden">
+      <div className="max-w-[1366px] mx-auto">
+        {userCookie ? <LoggedinNavbar lato={lato} /> : <Navbar lato={lato} />}
+      </div>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export async function middleware(req: NextRequest) {
     (req.url.includes("/login") || req.url.includes("/register")) &&
     verifiedToken
   ) {
-    return NextResponse.redirect(new URL("/", req.url));
+    return NextResponse.redirect(new URL("/challenges", req.url));
   }
 
   if (!verifiedToken) {
@@ -31,5 +31,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/login", "/register"],
+  matcher: ["/challenges", "/login", "/register"],
 };
