@@ -33,8 +33,10 @@
 
 .inputfocus:focus {
   background-color: transparent;
-  border-color: #a3d39c;
-  box-shadow: 0 0 0 0.1rem #a3d39c;
+  /* border-color: #a3d39c; */
+  /* box-shadow: 0 0 0 0.1rem #a3d39c; */
+  border-color: #68a3de;
+  box-shadow: 0 0 0 0.1rem #68a3de;
   background: #fff;
 }
 
