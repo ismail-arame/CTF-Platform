@@ -19,12 +19,12 @@ const challengeSchema = mongoose.Schema(
       type: String,
       enum: [
         "Pwn",
-        "Forensics",
         "Crypto",
-        "Malware Analysis",
         "Web",
-        "rev",
+        "Rev",
         "Misc",
+        "Forensics",
+        "Malware Analysis",
       ], //enum => only those values inside it can be used
       required: [true, "Challenge category is required"],
       trim: true,
@@ -53,6 +53,12 @@ const challengeSchema = mongoose.Schema(
     },
     websiteLink: {
       type: String,
+      trim: true,
+    },
+    difficulty: {
+      type: String,
+      enum: ["very easy", "easy", "medium", "hard"],
+      required: [true, "Challenge difficulty is required"],
       trim: true,
     },
     // flag is encrypted using bcrypt

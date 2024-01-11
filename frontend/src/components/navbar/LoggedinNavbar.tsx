@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { Chakra_Petch, Sansita } from "next/font/google";
 import { useMediaQuery } from "react-responsive";
+import { setActiveChallenge } from "@/redux/features/challengeSlice";
 
 const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
 const sansita = Sansita({ subsets: ["latin"], weight: "400" });
@@ -23,6 +24,22 @@ export default function LoggedinNavbar({ lato }: Props) {
     Cookies.remove("usertoken");
     await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/logout`);
     router.push("/login");
+    dispatch(
+      setActiveChallenge({
+        id: "",
+        name: "",
+        points: "",
+        category: "",
+        description: "",
+        author: "",
+        hints: [],
+        attachmentZipName: "",
+        attachmentUrl: "",
+        websiteLink: "",
+        difficulty: "",
+        solves: [],
+      })
+    );
   };
 
   const isLaptopOrTablet = useMediaQuery({

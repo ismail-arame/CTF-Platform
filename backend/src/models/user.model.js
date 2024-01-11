@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
+const { ObjectId } = mongoose.Schema;
+
 const userSchema = mongoose.Schema(
   {
     fullname: {
@@ -37,6 +39,23 @@ const userSchema = mongoose.Schema(
         message: "Password must be between 6 and 128 characters in length",
       },
     },
+    score: {
+      // points collected from solving challenges
+      type: Number,
+      default: 0,
+    },
+    solves: [
+      {
+        challenge: {
+          type: ObjectId,
+          ref: "ChallengeModel", // Reference to user by id
+        },
+        solvedAt: {
+          type: Date,
+          default: new Date(),
+        },
+      },
+    ],
   },
   {
     collection: "users",

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
-type Props = { ref: any; fun: any };
+type Props = {};
 
-export default function useClickOutside({ ref, fun }: Props) {
+export default function useClickOutside(ref: any, fun: any) {
   useEffect(() => {
     const listener = (e: any) => {
       if (!ref.current || ref.current.contains(e.target)) {

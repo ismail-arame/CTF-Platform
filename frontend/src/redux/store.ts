@@ -4,6 +4,7 @@ import createFilter from "redux-persist-transform-filter";
 
 //Slices
 import userSlice from "./features/userSlice";
+import challengeSlice from "./features/challengeSlice";
 
 // Storage
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
@@ -40,6 +41,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userSlice,
+  challenge: challengeSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

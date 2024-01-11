@@ -19,7 +19,6 @@ export default function Navbar({ lato }: Props) {
   const isScreenBelow700px = useMediaQuery({
     query: "(max-width: 700px)",
   });
-  console.log("isTabletOrLargePhone : ", isTabletOrLargePhone);
   return (
     <nav>
       <div

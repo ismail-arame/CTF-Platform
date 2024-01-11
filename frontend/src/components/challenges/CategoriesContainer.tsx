@@ -7,6 +7,11 @@ export default function CategoriesContainer({}: Props) {
     <>
       <Category categoryName="Pwn" />;
       <Category categoryName="Crypto" />;
+      <Category categoryName="Web" />;
+      <Category categoryName="Rev" />;
+      <Category categoryName="Misc" />;
+      <Category categoryName="Forensics" />;
+      <Category categoryName="Malware Analysis" />;
     </>
   );
 }

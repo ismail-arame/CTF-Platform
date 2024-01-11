@@ -40,6 +40,69 @@
   background: #fff;
 }
 
+@keyframes modalShowIn {
+  0% {
+    transform: translateY(50%);
+    opacity: 0.1;
+  }
+  30% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes modalShowOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  30% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+}
+
+.animate-modal {
+  transition: transform 0.2s ease;
+  transition: opacity 0.2s ease;
+  animation: modalShowIn 0.2s ease;
+}
+
+.animate-modal-removal {
+  transition: transform 0.2s ease;
+  transition: opacity 0.2s ease;
+  animation: modalShowOut 0.2s ease;
+}
+
+@keyframes blurAnimationIn {
+  0% {
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+  }
+  100% {
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+}
+
+.animate-bg-modal {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  transition: backdrop-filter 0.2s ease;
+  animation: blurAnimationIn 0.2s ease;
+}
+
+.animate-bg-modal-removal {
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+
 body {
   background-color: #fff;
   overflow-x: hidden;

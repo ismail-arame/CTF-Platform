@@ -1,8 +1,11 @@
 // import { Chakra_Petch } from "next/font/google";
+import { setActiveChallenge } from "@/redux/features/challengeSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { Chakra_Petch, Sansita } from "next/font/google";
 import { useMediaQuery } from "react-responsive";
 
 type Props = {
+  challenge: any;
   challengeName: string;
   solvesNumber: number;
   challengePoints: number;
@@ -13,11 +16,14 @@ const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "600" });
 const sansita = Sansita({ subsets: ["latin"], weight: "400" });
 
 export default function CategoryChallenge({
+  challenge,
   challengeName,
   solvesNumber,
   challengePoints,
   challengeDifficulty,
 }: Props) {
+  const dispatch = useAppDispatch();
+
   const isDesktopOrLaptop = useMediaQuery({
     query: "(max-width: 1200px)",
   });
@@ -28,7 +34,12 @@ export default function CategoryChallenge({
         !isDesktopOrLaptop ? "max-w-[260px]" : "w-full"
       } h-32 bg-[#24272A] border border-[#373A3D] rounded-lg relative px-[18px] py-3 cursor-pointer transition-all duration-200 ease hover:bg-[#1A1C21]`}
     >
-      <div className="flex flex-col">
+      <div
+        className="flex flex-col"
+        onClick={() => {
+          dispatch(setActiveChallenge(challenge));
+        }}
+      >
         {/* Challenge Title */}
         <div
           className={`${sansita.className} text-white text-[20px] font-semibold mb-5`}
