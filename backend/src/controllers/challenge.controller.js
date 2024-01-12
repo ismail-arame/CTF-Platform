@@ -6,6 +6,8 @@ const {
   findChallenges,
   findChallengeById,
 } = require("../services/challenge.service");
+const { ChallengeModel, UserModel } = require("../models");
+const { findUserById } = require("../services/user.service");
 
 exports.createChallenge = async (req, res, next) => {
   try {
@@ -49,18 +51,110 @@ exports.getChallenges = async (req, res, next) => {
   try {
     const challenges = await findChallenges();
     res.status(200).json(challenges);
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.getChallengeById = async (req, res, next) => {
   try {
-    const challenge_id = req.params.challenge_id;
-    if (!challenge_id) {
+    const challengeId = req.params.challengeId;
+    if (!challengeId) {
       logger.error("Please add the challenge id in the params");
       throw createHttpError.BadRequest("Something went wrong");
     }
 
-    const challenge = await findChallengeById(challenge_id);
+    const challenge = await findChallengeById(challengeId);
     res.status(200).json(challenge);
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.checkSubmittedFlag = async (req, res, next) => {
+  try {
+    const { flag, challengeId, userId } = req.body;
+
+    // *_*_*_*_*_*_*_*_* Compare Submitted Flag and Database Flag *_*_*_*_*_*_*_*_*
+    //get the challenge from db by its id
+    const challenge = await findChallengeById(challengeId);
+
+    //compare submitted flag with the database flag
+    const isSubmittedFlagValid = await bcrypt.compare(flag, challenge.flag);
+
+    if (!isSubmittedFlagValid) {
+      throw createHttpError.BadRequest("Flag is incorrect.");
+    }
+
+    // *_*_*_*_*_*_*_*_* Add user id to solves in ChallengeModel *_*_*_*_*_*_*_*_*
+
+    // check if the userId is already present in the solves array
+    // userSolved : true => means user have already solved the challenge
+    const userSolved = challenge.solves.some((solve) =>
+      solve.user.equals(userId)
+    );
+
+    // update the challenge model to add the userId to the solves array
+    if (!userSolved) {
+      const updateChallengeSolves = await ChallengeModel.findOneAndUpdate(
+        { _id: challengeId },
+        {
+          // $addToSet => this operation adds new element to the array (solves array in this case)
+          $addToSet: {
+            solves: {
+              user: userId,
+              solvedAt: new Date(),
+            },
+          },
+        },
+        { new: true } //makes the method return the updated document
+      );
+
+      if (!updateChallengeSolves) {
+        throw createHttpError.InternalServerError(
+          "Failed to update challenge solves."
+        );
+      }
+    } else {
+      throw createHttpError.Conflict("You have already solved this challenge.");
+    }
+
+    // *_*_*_*_*_*_*_*_* Add challenge id to solves in UserModel and Update User Score *_*_*_*_*_*_*_*_*
+
+    const user = await findUserById(userId);
+
+    // check if the challengeId is already present in the solves array
+    // challengeSolved : true => means user have already solved the challenge
+    const challengeSolved = user.solves.some((solve) =>
+      solve.challenge.equals(challengeId)
+    );
+
+    if (!challengeSolved) {
+      const updateUserSolves = await UserModel.findOneAndUpdate(
+        { _id: userId },
+        {
+          $addToSet: {
+            solves: {
+              challenge: challengeId,
+              solvedAt: new Date(),
+            },
+          },
+          $inc: { score: challenge.points }, // increment user score
+        },
+        { new: true }
+      );
+
+      if (!updateUserSolves) {
+        throw createHttpError.InternalServerError(
+          "Failed to update user solves."
+        );
+      }
+    } else {
+      throw createHttpError.Conflict("You have already solved this challenge.");
+    }
+
+    res.send("Flag is correct.");
+  } catch (error) {
+    next(error);
+  }
 };

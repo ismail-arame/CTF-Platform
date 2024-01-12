@@ -28,7 +28,7 @@ const lato = Lato({ subsets: ["latin"], weight: "400" });
 
 export default function Login({}: Props) {
   const dispatch = useAppDispatch();
-  const { status, error } = useAppSelector((state) => state.user);
+  // const { status, error } = useAppSelector((state) => state.user);
   const router = useRouter();
   const {
     register,

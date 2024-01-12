@@ -5,7 +5,7 @@ import LoggedinNavbar from "@/components/navbar/LoggedinNavbar";
 import { Chakra_Petch, Lato } from "next/font/google";
 import CategoriesContainer from "@/components/challenges/CategoriesContainer";
 import { useMediaQuery } from "react-responsive";
-import ChallengeModal from "@/components/challenges/ChallengeModal";
+import ChallengeModal from "@/components/challengeModal/ChallengeModal";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
 import { getChallenges } from "@/redux/features/challengeSlice";

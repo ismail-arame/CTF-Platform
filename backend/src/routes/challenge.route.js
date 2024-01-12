@@ -6,12 +6,14 @@ const {
   getChallenges,
   createChallenge,
   getChallengeById,
+  checkSubmittedFlag,
 } = require("../controllers/challenge.controller");
 
 // add authMiddleware when this functions are finished coding like this :
 // router.post("/", trimRequest.all, authMiddleware, createChallenge);
 router.post("/", trimRequest.all, authMiddleware, createChallenge);
 router.get("/", trimRequest.all, authMiddleware, getChallenges);
-router.get("/:challenge_id", trimRequest.all, authMiddleware, getChallengeById);
+router.get("/:challengeId", trimRequest.all, authMiddleware, getChallengeById);
+router.post("/checkFlag", authMiddleware, checkSubmittedFlag);
 
 module.exports = router;

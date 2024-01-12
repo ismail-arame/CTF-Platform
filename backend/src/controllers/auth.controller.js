@@ -12,7 +12,6 @@ let refreshTokens = [];
 exports.register = async (req, res, next) => {
   try {
     const { fullname, username, email, password } = req.body;
-    console.log("body content : ", fullname, username, email, password);
     const newUser = await createUser({
       fullname,
       username,
@@ -56,11 +55,8 @@ exports.register = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    console.log("login creds : ", email, password);
 
     const user = await signUser(email, password);
-
-    console.log("user login : ", user);
 
     //generate access token
     const accessToken = await generateToken(

@@ -16,8 +16,8 @@ exports.findChallenges = async () => {
   return challenges;
 };
 
-exports.findChallengeById = async (challenge_id) => {
-  const challenge = await ChallengeModel.findById(challenge_id);
+exports.findChallengeById = async (challengeId) => {
+  const challenge = await ChallengeModel.findById(challengeId);
   if (!challenge) {
     throw createHttpError.BadRequest("Something went wrong");
   }

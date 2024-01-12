@@ -21,12 +21,6 @@ export default function Category({ categoryName }: Props) {
     (challenge: any) => challenge.category === categoryName
   );
 
-  if (challengesArrayHasCategoryName) {
-    console.log(
-      `challenges array has at least one challenge of : ${categoryName}`
-    );
-  }
-
   const isDesktopOrLaptop = useMediaQuery({
     query: "(max-width: 1200px)",
   });
