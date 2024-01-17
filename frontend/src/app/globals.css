@@ -16,6 +16,20 @@
   }
 }
 
+/* ----- Custom Scrollbar ----- */
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+/* ----- Track ----- */
+.scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* ----- Thumb ----- */
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #323843;
+  border-radius: 2px;
+}
+
 .nav_items {
   margin-right: 14px;
   color: #ffffff8c;
@@ -37,7 +51,8 @@
   /* box-shadow: 0 0 0 0.1rem #a3d39c; */
   border-color: #68a3de;
   box-shadow: 0 0 0 0.1rem #68a3de;
-  background: #fff;
+  /* background: #fff; */
+  background: #282c35;
 }
 
 @keyframes modalShowIn {

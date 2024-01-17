@@ -2,6 +2,7 @@ import { Chakra_Petch } from "next/font/google";
 import CategoryChallenge from "./CategoryChallenge";
 import { useMediaQuery } from "react-responsive";
 import { useAppSelector } from "@/redux/hooks";
+import { challengeType } from "../../types/challengeType";
 
 type Props = {
   categoryName: string;
@@ -11,14 +12,15 @@ const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
 
 export default function Category({ categoryName }: Props) {
   const { challenges } = useAppSelector((state) => state.challenge);
+  const { user } = useAppSelector((state) => state.user);
 
   //filtering challenges based on the categoryName
   const filteredChallenges = challenges.filter(
-    (challenge: any) => challenge.category === categoryName
+    (challenge: challengeType) => challenge.category === categoryName
   );
 
   const challengesArrayHasCategoryName = challenges.some(
-    (challenge: any) => challenge.category === categoryName
+    (challenge: challengeType) => challenge.category === categoryName
   );
 
   const isDesktopOrLaptop = useMediaQuery({
@@ -66,7 +68,10 @@ export default function Category({ categoryName }: Props) {
           >
             {filteredChallenges &&
               filteredChallenges.length > 0 &&
-              filteredChallenges.map((challenge: any) => {
+              filteredChallenges.map((challenge: challengeType) => {
+                const isUserSolved = challenge.solves.some(
+                  (solve) => solve.user._id === user._id
+                );
                 return (
                   <CategoryChallenge
                     challenge={challenge}
@@ -75,6 +80,7 @@ export default function Category({ categoryName }: Props) {
                     key={challenge._id}
                     challengePoints={challenge.points}
                     challengeDifficulty={challenge.difficulty}
+                    isUserSolved={isUserSolved}
                   />
                 );
               })}
@@ -84,3 +90,5 @@ export default function Category({ categoryName }: Props) {
     </>
   );
 }
+
+// solves = [{user:"65a13dd2410183c4e2640f93", solvedAt:"2024-01-12T14:33:40.029Z"}, {user:"65a13dd24101356c4e2640f93", solvedAt:"2023-01-12T14:33:40.029Z"}]

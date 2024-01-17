@@ -9,7 +9,8 @@ type Props = {
   challengeName: string;
   solvesNumber: number;
   challengePoints: number;
-  challengeDifficulty: "easy" | "medium" | "hard";
+  challengeDifficulty: "very easy" | "easy" | "medium" | "hard";
+  isUserSolved: boolean;
 };
 
 const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "600" });
@@ -21,6 +22,7 @@ export default function CategoryChallenge({
   solvesNumber,
   challengePoints,
   challengeDifficulty,
+  isUserSolved,
 }: Props) {
   const dispatch = useAppDispatch();
 
@@ -30,9 +32,11 @@ export default function CategoryChallenge({
 
   return (
     <div
-      className={`${
-        !isDesktopOrLaptop ? "max-w-[260px]" : "w-full"
-      } h-32 bg-[#24272A] border border-[#373A3D] rounded-lg relative px-[18px] py-3 cursor-pointer transition-all duration-200 ease hover:bg-[#1A1C21]`}
+      className={`${!isDesktopOrLaptop ? "max-w-[260px]" : "w-full"} h-32 ${
+        isUserSolved
+          ? "bg-[#164863] hover:bg-[#153f55]"
+          : "bg-[#24272A] hover:bg-[#1A1C21]"
+      } border border-[#373A3D] rounded-lg relative px-[18px] py-3 cursor-pointer transition-all duration-200 ease`}
     >
       <div
         className="flex flex-col"
@@ -48,7 +52,7 @@ export default function CategoryChallenge({
         </div>
         {/* Challenge Solves */}
         <div
-          className={`${chakra_petch.className} text-white text-xs font-medium`}
+          className={`${chakra_petch.className} text-[#DDF2FD] text-xs font-medium`}
         >
           {solvesNumber} solves
         </div>
@@ -61,10 +65,14 @@ export default function CategoryChallenge({
         {/* Challenge Difficulty Level */}
       </div>
       <div
-        className={`${sansita.className} absolute bottom-4 right-4 bg-[#68C8DE] px-1 py-[2px] rounded-md text-[13px] font-semibold`}
+        className={`${sansita.className} absolute bottom-4 right-4 ${
+          isUserSolved ? "bg-[#9BBEC8]" : "bg-[#9BBEC8]"
+        } px-1 py-[2px] rounded-md text-[13px] font-semibold`}
       >
         {challengeDifficulty}
       </div>
     </div>
   );
 }
+
+// #427D9D || #164863  || #9BBEC8 || #DDF2FD

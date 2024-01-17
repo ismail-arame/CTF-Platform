@@ -1,22 +1,28 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { challengeType } from "@/types/challengeType";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
+const initialState: {
+  status: string;
+  error: string;
+  challenges: challengeType[];
+  activeChallenge: challengeType;
+} = {
   status: "",
   error: "",
   challenges: [],
   activeChallenge: {
-    id: "",
+    _id: "",
     name: "",
-    points: "",
-    category: "",
+    points: 0,
+    category: "Pwn",
     description: "",
     author: "",
     hints: [],
     attachmentZipName: "",
     attachmentUrl: "",
     websiteLink: "",
-    difficulty: "",
+    difficulty: "very easy",
     solves: [],
   },
 };
@@ -26,6 +32,11 @@ type valuesType = {
   flag: string;
   challengeId: string;
   userId: string;
+};
+
+type userInfosType = {
+  userId: string;
+  username: string;
 };
 
 /* _*_*_*_*_*_*_*_*_*_*_* functions *_*_*_*_*_*_*_*_*_*_* _ */
@@ -81,6 +92,33 @@ export const challengeSlice = createSlice({
     setActiveChallenge: (state, action) => {
       state.activeChallenge = action.payload;
     },
+    increaseChallengeSolves: (state, action: PayloadAction<userInfosType>) => {
+      // Increase the challenge solves only for the active solved challenge
+      const userId = action.payload.userId;
+      const username = action.payload.username;
+
+      state.challenges = state.challenges.map((challenge) => {
+        if (challenge._id === state.activeChallenge._id) {
+          return {
+            ...challenge,
+            solves: [
+              ...(challenge.solves || []),
+              {
+                user: { _id: userId, username: username },
+                solvedAt: new Date(),
+              },
+            ],
+          };
+        } else {
+          return challenge;
+        }
+      });
+
+      state.activeChallenge.solves = [
+        ...(state.activeChallenge.solves || []),
+        { user: { _id: userId, username: username }, solvedAt: new Date() },
+      ];
+    },
   },
   extraReducers: (builder) => {
     /* ----- getConversations ----- */
@@ -112,5 +150,6 @@ export const challengeSlice = createSlice({
   },
 });
 
-export const { setActiveChallenge } = challengeSlice.actions;
+export const { setActiveChallenge, increaseChallengeSolves } =
+  challengeSlice.actions;
 export default challengeSlice.reducer;

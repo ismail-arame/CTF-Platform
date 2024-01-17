@@ -9,3 +9,12 @@ exports.findUserById = async (userId) => {
 
   return user;
 };
+
+exports.findUsers = async () => {
+  const users = await UserModel.find({}, "username fullname picture");
+  if (!users) {
+    throw createHttpError.BadRequest("Something went wrong");
+  }
+
+  return users;
+};

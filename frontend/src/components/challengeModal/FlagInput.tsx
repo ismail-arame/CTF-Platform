@@ -7,6 +7,8 @@ type FlagInputPropsType = {
   placeholder: string;
   register: any;
   error: string | undefined;
+  istheFlagCorrect: boolean;
+  flagSubmitResponse: string;
 };
 
 const sansita = Sansita({ subsets: ["latin"], weight: "400" });
@@ -17,12 +19,22 @@ export default function FlagInput({
   placeholder,
   register,
   error,
+  istheFlagCorrect,
+  flagSubmitResponse,
 }: FlagInputPropsType) {
   return (
     <div className="w-full">
       <div className="relative">
         <input
-          className="w-full bg-[#282c35] focus:text-[#aaaaaa] text-[#aaaaaa] text-base py-[13px] px-4 outline-none rounded-lg border border-solid border-1 border-[#323843] focus:border-[#68C8DE] mt-2 transition-all duration-300"
+          className={`w-full bg-[#282c35] focus:text-[#aaaaaa] text-[#aaaaaa] text-base py-[13px] px-4 outline-none rounded-lg border border-solid border-1 ${
+            error
+              ? "border-red-500"
+              : flagSubmitResponse
+                ? istheFlagCorrect
+                  ? "border-[#0CCA4A]"
+                  : "border-red-500"
+                : "border-[#323843]"
+          } focus:border-[#68C8DE] mt-2 transition-all duration-300`}
           type={type}
           {...register(name)}
           placeholder={placeholder}
@@ -34,7 +46,7 @@ export default function FlagInput({
           Submit
         </button>
       </div>
-      {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
+      {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
     </div>
   );
 }

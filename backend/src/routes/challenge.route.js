@@ -14,6 +14,6 @@ const {
 router.post("/", trimRequest.all, authMiddleware, createChallenge);
 router.get("/", trimRequest.all, authMiddleware, getChallenges);
 router.get("/:challengeId", trimRequest.all, authMiddleware, getChallengeById);
-router.post("/checkFlag", authMiddleware, checkSubmittedFlag);
+router.post("/checkFlag", trimRequest.all, authMiddleware, checkSubmittedFlag);
 
 module.exports = router;

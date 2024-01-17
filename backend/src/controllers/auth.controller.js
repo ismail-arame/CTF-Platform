@@ -19,6 +19,7 @@ exports.register = async (req, res, next) => {
       password,
     });
 
+    console.log("newUser : ", newUser);
     //generate access token
     const accessToken = await generateToken(
       { userId: newUser._id, isAdmin: false },
@@ -42,8 +43,8 @@ exports.register = async (req, res, next) => {
         username: newUser.username,
         email: newUser.email,
         picture: newUser.picture,
+        solves: newUser.solves,
         token: accessToken,
-        refreshToken,
       },
     });
   } catch (error) {
@@ -57,6 +58,7 @@ exports.login = async (req, res, next) => {
     const { email, password } = req.body;
 
     const user = await signUser(email, password);
+    console.log("user : ", user);
 
     //generate access token
     const accessToken = await generateToken(
@@ -80,8 +82,8 @@ exports.login = async (req, res, next) => {
         username: user.username,
         email: user.email,
         picture: user.picture,
+        solves: user.solves,
         token: accessToken,
-        refreshToken,
       },
     });
   } catch (error) {

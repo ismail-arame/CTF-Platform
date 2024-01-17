@@ -1,10 +1,14 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import FlagInput from "../auth/FlagInput";
+import FlagInput from "./FlagInput";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { checkSubmittedFlag } from "@/redux/features/challengeSlice";
+import {
+  checkSubmittedFlag,
+  increaseChallengeSolves,
+} from "@/redux/features/challengeSlice";
 import { useState } from "react";
+import { increaseUserSolves } from "@/redux/features/userSlice";
 
 const formSchema = z.object({
   flag: z.string().regex(/^DEFENSYS\{.*\}$/, {
@@ -21,11 +25,7 @@ export default function FlagSubmitForm({}: Props) {
   const { activeChallenge } = useAppSelector((state) => state.challenge);
   const [flagSubmitResponse, setFlagSubmitResponse] = useState("");
   const [istheFlagCorrect, setIstheFlagCorrect] = useState(false);
-  // const values = {
-  //   token: user.token,
-  //   challengeId: activeChallenge._id,
-  //   userId: user._id,
-  // };
+
   const {
     register,
     handleSubmit,
@@ -34,6 +34,11 @@ export default function FlagSubmitForm({}: Props) {
   } = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
   });
+
+  const userInfos = {
+    userId: user._id,
+    username: user.username,
+  };
 
   const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
     let res = await dispatch(
@@ -44,16 +49,20 @@ export default function FlagSubmitForm({}: Props) {
         userId: user._id,
       })
     );
-    if (res.type === "challenge/checkFlag/fulfilled") {
-      setIstheFlagCorrect(res.payload);
-    }
-    setFlagSubmitResponse(res.payload);
 
-    console.log("response : ", res);
+    if (res.type === "challenge/checkFlag/fulfilled") {
+      setIstheFlagCorrect(true);
+      dispatch(increaseChallengeSolves(userInfos));
+      dispatch(increaseUserSolves(activeChallenge._id));
+    } else {
+      setIstheFlagCorrect(false);
+    }
+
+    setFlagSubmitResponse(res.payload);
   };
 
   return (
-    <div className="flex flex-col mb-3">
+    <div className="flex flex-col">
       <form onSubmit={handleSubmit(onSubmit)}>
         <FlagInput
           name="flag"
@@ -61,9 +70,21 @@ export default function FlagSubmitForm({}: Props) {
           placeholder="Flag"
           register={register}
           error={errors?.flag?.message}
+          istheFlagCorrect={istheFlagCorrect}
+          flagSubmitResponse={flagSubmitResponse}
         />
       </form>
-      <div className=""></div>
+      {flagSubmitResponse && (
+        <div
+          className={`${
+            istheFlagCorrect ? "text-green-400" : "text-red-400"
+          } text-[15px] mt-2`}
+        >
+          {flagSubmitResponse}
+        </div>
+      )}
     </div>
   );
 }
+
+// #E94F37 #0CCA4A

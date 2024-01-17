@@ -39,13 +39,13 @@ export default function ChallengeModalChallengeInfo({
           </div>
         </div>
         {/* Link*/}
-        <div className="text-[#68A3DE] mb-3 cursor-pointer transition-all duration-200 ease hover:text-[#688fde]">
+        <div className="text-[#68A3DE] mb-3 cursor-pointer transition-all duration-200 ease hover:text-[#427D9D]">
           {activeChallenge.websiteLink}
         </div>
       </div>
       {/* attachment */}
       <div className="flex justify-start items-start mb-3">
-        <div className="flex items-center justify-center px-3 py-2 bg-[#68C8DE] rounded-lg cursor-pointer mr-2 transition-all duration-200 ease hover:bg-[#68A3DE]">
+        <div className="flex items-center justify-center px-3 py-2 bg-[#68C8DE] rounded-lg cursor-pointer mr-2 transition-all duration-200 ease hover:bg-[#427D9D]">
           <div className="mr-2">
             <i className="fa fa-download" aria-hidden="true"></i>
           </div>

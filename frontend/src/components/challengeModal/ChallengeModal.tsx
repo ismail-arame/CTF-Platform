@@ -63,7 +63,7 @@ export default function ChallengeModal({ activeChallenge }: Props) {
       <div
         className={`flex flex-col absolute w-[500px] ${
           isChallengeTabClicked ? "max-h-max" : "h-[458px]"
-        } bg-[#1A1B1E] rounded-lg py-6 px-8`}
+        } bg-[#1A1B1E] rounded-lg py-7 pl-8 pr-6`}
         ref={modalRef}
       >
         {/* Challenge Model Header */}

@@ -11,13 +11,23 @@ exports.createChallenge = async (challengeData) => {
 };
 
 exports.findChallenges = async () => {
-  const challenges = await ChallengeModel.find({}).sort({ points: 1 });
+  const challenges = await ChallengeModel.find({})
+    .sort({ points: 1 })
+    .populate({
+      path: "solves.user",
+      select: "username",
+      model: "UserModel",
+    });
 
   return challenges;
 };
 
 exports.findChallengeById = async (challengeId) => {
-  const challenge = await ChallengeModel.findById(challengeId);
+  const challenge = await ChallengeModel.findById(challengeId).populate({
+    path: "solves.user",
+    select: "username",
+    model: "UserModel",
+  });
   if (!challenge) {
     throw createHttpError.BadRequest("Something went wrong");
   }

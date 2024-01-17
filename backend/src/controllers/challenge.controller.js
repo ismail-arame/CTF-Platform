@@ -83,7 +83,7 @@ exports.checkSubmittedFlag = async (req, res, next) => {
     const isSubmittedFlagValid = await bcrypt.compare(flag, challenge.flag);
 
     if (!isSubmittedFlagValid) {
-      throw createHttpError.BadRequest("Flag is incorrect.");
+      throw createHttpError.BadRequest("Flag is incorrect");
     }
 
     // *_*_*_*_*_*_*_*_* Add user id to solves in ChallengeModel *_*_*_*_*_*_*_*_*
@@ -112,11 +112,11 @@ exports.checkSubmittedFlag = async (req, res, next) => {
 
       if (!updateChallengeSolves) {
         throw createHttpError.InternalServerError(
-          "Failed to update challenge solves."
+          "Failed to update challenge solves"
         );
       }
     } else {
-      throw createHttpError.Conflict("You have already solved this challenge.");
+      throw createHttpError.Conflict("You have already solved this challenge");
     }
 
     // *_*_*_*_*_*_*_*_* Add challenge id to solves in UserModel and Update User Score *_*_*_*_*_*_*_*_*
@@ -146,14 +146,14 @@ exports.checkSubmittedFlag = async (req, res, next) => {
 
       if (!updateUserSolves) {
         throw createHttpError.InternalServerError(
-          "Failed to update user solves."
+          "Failed to update user solves"
         );
       }
     } else {
-      throw createHttpError.Conflict("You have already solved this challenge.");
+      throw createHttpError.Conflict("You have already solved this challenge");
     }
 
-    res.send("Flag is correct.");
+    res.send("Flag is correct");
   } catch (error) {
     next(error);
   }

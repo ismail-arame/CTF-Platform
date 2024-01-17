@@ -11,7 +11,9 @@ import { useRouter } from "next/navigation";
 import AuthInput from "@/components/auth/AuthInput";
 import { registerUser } from "@/redux/features/userSlice";
 import Cookies from "js-cookie";
+import { useMediaQuery } from "react-responsive";
 
+// add numbers to username in the regex (remember to do later)
 const formSchema = z.object({
   username: z
     .string()
@@ -65,6 +67,11 @@ export default function Register({}: Props) {
     }
   };
 
+  // Responsiveness
+  const isScreenBelow700px = useMediaQuery({
+    query: "(max-width: 700px)",
+  });
+
   return (
     <div className="h-full w-screen bg-[#1a1c22]">
       <div className="max-w-[1366px] mx-auto">
@@ -73,7 +80,9 @@ export default function Register({}: Props) {
         {/* Register Title */}
         <div className="w-full flex items-center justify-center py-[64px] px-[32px] bg-[#1a1c22] mb-8">
           <h1
-            className={`${chakra_petch.className} text-[42px] text-white tracking-[2px] font-medium`}
+            className={`${chakra_petch.className} ${
+              !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
+            } text-white tracking-[2px] font-medium`}
           >
             Register
           </h1>

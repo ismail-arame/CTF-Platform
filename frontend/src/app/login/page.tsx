@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import AuthInput from "@/components/auth/AuthInput";
 import Cookies from "js-cookie";
 import { loginUser } from "@/redux/features/userSlice";
+import { useMediaQuery } from "react-responsive";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -48,6 +49,11 @@ export default function Login({}: Props) {
     }
   };
 
+  // Responsiveness
+  const isScreenBelow700px = useMediaQuery({
+    query: "(max-width: 700px)",
+  });
+
   return (
     <div className="h-screen w-screen bg-[#1a1c22] overflow-y-hidden">
       <div className="max-w-[1366px] mx-auto">
@@ -56,7 +62,9 @@ export default function Login({}: Props) {
         {/* Login Title */}
         <div className="w-full flex items-center justify-center py-[64px] px-[32px] bg-[#1a1c22] mb-8">
           <h1
-            className={`${chakra_petch.className} text-[42px] text-white tracking-[2px] font-medium`}
+            className={`${chakra_petch.className} ${
+              !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
+            } text-white tracking-[2px] font-medium`}
           >
             Login
           </h1>

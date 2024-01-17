@@ -1,14 +1,22 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { loginTypes, registerTypes } from "@/types/authTypes";
 import axios from "axios";
+import { userType } from "@/types/userType";
 
-const initialState = {
+const initialState: {
+  status: string;
+  error: string;
+  user: userType;
+} = {
   status: "",
   error: "",
   user: {
-    id: "",
-    name: "",
+    _id: "",
+    fullname: "",
+    username: "",
     email: "",
+    picture: "",
+    solves: [],
     token: "",
   },
 };
@@ -22,7 +30,6 @@ export const registerUser = createAsyncThunk(
         { ...values }
       );
 
-      // console.log("register data : ", data);
       return data;
     } catch (error: any) {
       return rejectWithValue(error.response.data.error.message);
@@ -39,9 +46,29 @@ export const loginUser = createAsyncThunk(
         { ...values }
       );
 
-      // console.log("login data : ", data);
       return data;
     } catch (error: any) {
+      console.log("login error: ", error);
+      return rejectWithValue(error.response.data.error.message);
+    }
+  }
+);
+
+// get users function
+export const getUsers = createAsyncThunk(
+  "/user/all",
+  async (token: string, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      return data;
+    } catch (error: any) {
+      console.log("login error: ", error);
       return rejectWithValue(error.response.data.error.message);
     }
   }
@@ -55,11 +82,22 @@ export const userSlice = createSlice({
       state.status = "";
       state.error = "";
       state.user = {
-        id: "",
-        name: "",
+        _id: "",
+        fullname: "",
+        username: "",
         email: "",
+        picture: "",
+        solves: [],
         token: "",
       };
+    },
+    increaseUserSolves: (state, action: PayloadAction<string>) => {
+      const challengeId = action.payload;
+
+      state.user.solves = [
+        ...(state.user.solves || []),
+        { challenge: challengeId, solvedAt: new Date() },
+      ];
     },
   },
   extraReducers: (builder) => {
@@ -83,25 +121,37 @@ export const userSlice = createSlice({
     });
 
     /* _*************** Login *************** _*/
-    //when we send a request it fires the loading state
     builder.addCase(loginUser.pending, (state) => {
       state.status = "loading";
     });
 
-    // When a server responses with the data
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.status = "succeeded";
       state.error = "";
       state.user = action.payload.user;
     });
 
-    // When a server responses with the data
     builder.addCase(loginUser.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.payload as any;
+    });
+
+    /* _*************** getUsers *************** _*/
+    builder.addCase(getUsers.pending, (state) => {
+      state.status = "loading";
+    });
+
+    builder.addCase(getUsers.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.error = "";
+    });
+
+    builder.addCase(getUsers.rejected, (state, action) => {
       state.status = "failed";
       state.error = action.payload as any;
     });
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, increaseUserSolves } = userSlice.actions;
 export default userSlice.reducer;
