@@ -46,19 +46,6 @@ export default function ChallengeModalSolvesInfo({}: Props) {
     return formattedWithOrdinal.replace(" at", "");
   };
 
-  // const formatDate = (date: Date): string => {
-  //   const options: Intl.DateTimeFormatOptions = {
-  //     month: "long",
-  //     day: "numeric",
-  //     hour: "numeric",
-  //     minute: "numeric",
-  //     second: "numeric",
-  //     hour12: true,
-  //   };
-
-  //   return new Intl.DateTimeFormat("en-US", options).format(date);
-  // };
-
   return (
     <div className="overflow-y-scroll scrollbar">
       <div className="grid grid-cols-2 place-items-center mb-4">

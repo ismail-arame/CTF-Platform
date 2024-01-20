@@ -74,6 +74,26 @@ export const getUsers = createAsyncThunk(
   }
 );
 
+// get user by id function
+export const getUserById = createAsyncThunk(
+  "/user/all",
+  async (values: any, { rejectWithValue }) => {
+    try {
+      const { token, userId } = values;
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/${userId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.error.message);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,

@@ -95,7 +95,7 @@ export default function LoggedinNavbar({ lato }: Props) {
         <div className="flex justify-center">
           <ul className="list-none flex">
             <li className="nav_items">
-              <Link href="/profile">Profile</Link>
+              <Link href="/user">Profile</Link>
             </li>
             <li className="nav_items" onClick={handleLogout}>
               <Link href="/">Logout</Link>

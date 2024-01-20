@@ -1,7 +1,6 @@
 "use client";
 
 import LoggedinNavbar from "@/components/navbar/LoggedinNavbar";
-import Navbar from "@/components/navbar/Navbar";
 import ListUsers from "@/components/users/ListUsers";
 import UsersSearchForm from "@/components/users/usersSearchForm";
 import { getUsers } from "@/redux/features/userSlice";
@@ -28,7 +27,6 @@ export default function Users({}: Props) {
         const res = await dispatch(getUsers(user.token));
         setUsers(res.payload); //array of user objects
         setFilteredUsers(res.payload);
-        console.log("getUsers res : ", res);
       }
     };
 
