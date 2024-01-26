@@ -1,6 +1,7 @@
 import { useAppSelector } from "@/redux/hooks";
 import { challengeType } from "@/types/challengeType";
 import { Chakra_Petch, Raleway, Sansita } from "next/font/google";
+import Link from "next/link";
 
 type Props = {};
 
@@ -80,7 +81,9 @@ export default function ChallengeModalSolvesInfo({}: Props) {
                   <div
                     className={`${sansita.className} text-lg text-[#68C8DE] hover:text-[#68A3DE] cursor-pointer`}
                   >
-                    {solve.user?.username}
+                    <Link href={`/user/${solve.user?._id}`}>
+                      {solve.user?.username}
+                    </Link>
                   </div>
                   <div className="text-white text-sm font-medium">
                     {formatDate(new Date(solve.solvedAt))}

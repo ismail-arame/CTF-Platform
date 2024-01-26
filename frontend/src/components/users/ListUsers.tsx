@@ -1,4 +1,5 @@
 import { Chakra_Petch, Sansita } from "next/font/google";
+import Link from "next/link";
 
 type Props = {
   filteredUsers: any;
@@ -26,7 +27,9 @@ export default function ListUsers({ filteredUsers }: Props) {
               <div
                 className={`${sansita.className} text-lg text-[#DDF2FD] hover:text-[#68A3DE] cursor-pointer`}
               >
-                <span className="pl-4">{user.username}</span>
+                <Link href={`/user/${user._id}`} className="pl-4">
+                  {user.username}
+                </Link>
               </div>
             </div>
           );

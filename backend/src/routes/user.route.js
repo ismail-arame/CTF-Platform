@@ -7,6 +7,7 @@ const { getUsers, getUserById } = require("../controllers/user.controller");
 
 // get users endpoint
 router.get("/", trimRequest.all, authMiddleware, getUsers);
+//get user by id endpoint
 router.get("/:userId", trimRequest.all, authMiddleware, getUserById);
 
 module.exports = router;
