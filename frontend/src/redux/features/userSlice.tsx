@@ -94,6 +94,25 @@ export const getUserById = createAsyncThunk(
   }
 );
 
+// get scoreboard function
+export const getScoreboard = createAsyncThunk(
+  "/scoreboard/",
+  async (token: string, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/scoreboard/`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.error.message);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -167,6 +186,21 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(getUsers.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.payload as any;
+    });
+
+    /* _*************** getScoreboard *************** _*/
+    builder.addCase(getScoreboard.pending, (state) => {
+      state.status = "loading";
+    });
+
+    builder.addCase(getScoreboard.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.error = "";
+    });
+
+    builder.addCase(getScoreboard.rejected, (state, action) => {
       state.status = "failed";
       state.error = action.payload as any;
     });

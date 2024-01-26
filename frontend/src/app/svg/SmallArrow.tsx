@@ -1,6 +1,4 @@
-import { classNameType } from "@/types/classnameType";
-
-function SmallArrowIcon({ className }: classNameType) {
+function SmallArrowIcon({ className }: any) {
   return (
     <svg width="10" height="21" x="0" y="0" viewBox="0 0 10 21">
       <path

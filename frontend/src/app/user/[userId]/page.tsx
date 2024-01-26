@@ -2,7 +2,11 @@
 
 import LoggedinNavbar from "@/components/navbar/LoggedinNavbar";
 import UserSolvedChallengesList from "@/components/profile/UserSolvedChallengesList";
-import { getUserById, getUsers } from "@/redux/features/userSlice";
+import {
+  getScoreboard,
+  getUserById,
+  getUsers,
+} from "@/redux/features/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Chakra_Petch, Lato, Sansita } from "next/font/google";
 import { useEffect, useState } from "react";
@@ -27,6 +31,8 @@ export default function User({}: Props) {
   useEffect(() => {
     const fetchData = async () => {
       if (user?.token) {
+        // to update the rank of the user
+        await dispatch(getScoreboard(user?.token));
         const res = await dispatch(getUserById(values));
         setUserInfo(res.payload);
         console.log("getUserById res : ", res);
@@ -90,7 +96,13 @@ export default function User({}: Props) {
                       !isScreenBelow700px ? "text-[26px]" : "text-[22px]"
                     } text-white tracking-[1px] font-medium`}
                   >
-                    234th place
+                    {userInfo?.rank}
+                    {userInfo?.rank === 1
+                      ? "st"
+                      : userInfo?.rank === 2
+                        ? "nd"
+                        : "th"}{" "}
+                    place
                   </h3>
                   <h3
                     className={`${sansita.className} ${

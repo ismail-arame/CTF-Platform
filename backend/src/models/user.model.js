@@ -48,6 +48,19 @@ const userSchema = mongoose.Schema(
       type: Number,
       default: 1,
     },
+    // firstBlood => the very first solver of a challenge
+    firstBlood: [
+      {
+        challenge: {
+          type: ObjectId,
+          ref: "ChallengeModel",
+        },
+        solvedAt: {
+          type: Date,
+          default: new Date(),
+        },
+      },
+    ],
     solves: [
       {
         challenge: {

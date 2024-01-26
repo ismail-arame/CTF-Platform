@@ -26,7 +26,13 @@ import CallIcon from "./Call";
 import MuteIcon from "./Mute";
 import NoVideoIcon from "./NoVideo";
 import TriangleIcon from "./Triangle";
+import PointsIcon from "./Points";
+import ChallengeIcon from "./Challenge";
+import FirstBloodIcon from "./FirstBlood";
 export {
+  FirstBloodIcon,
+  ChallengeIcon,
+  PointsIcon,
   TriangleIcon,
   CommunityIcon,
   StoryIcon,

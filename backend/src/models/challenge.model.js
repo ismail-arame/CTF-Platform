@@ -79,6 +79,10 @@ const challengeSchema = mongoose.Schema(
           default: new Date(), // Creates a Date object with the current date and time // Output : Mon Jan 10 2024 12:34:56 GMT+0000 (Coordinated Universal Time)
           // default: Date.now(), // Returns the current timestamp in milliseconds // Output: 1641849296000
         },
+        firstBlood: {
+          type: Boolean,
+          default: false,
+        },
       },
     ],
   },

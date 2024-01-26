@@ -39,13 +39,13 @@ export default function Navbar({ lato }: Props) {
               </Link>
             </li>
             <li className="nav_items">
-              <Link href="/users">Users</Link>
+              <Link href="/login">Users</Link>
             </li>
             <li className="nav_items">
-              <Link href="/scoreboard">Scoreboard</Link>
+              <Link href="/login">Scoreboard</Link>
             </li>
             <li className="nav_items">
-              <Link href="/challenges">Challenges</Link>
+              <Link href="/login">Challenges</Link>
             </li>
           </ul>
         </div>

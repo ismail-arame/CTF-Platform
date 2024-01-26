@@ -1,6 +1,4 @@
-import { classNameType } from "@/types/classnameType";
-
-export default function ArrowIcon({ className }: classNameType) {
+export default function ArrowIcon({ className }: any) {
   return (
     <svg
       viewBox="0 0 8 12"

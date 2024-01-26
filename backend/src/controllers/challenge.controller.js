@@ -94,6 +94,9 @@ exports.checkSubmittedFlag = async (req, res, next) => {
       solve.user.equals(userId)
     );
 
+    // Check if the challenge has not been solved before (solves array is empty) => firstBlood
+    const challengeNotSolvedBefore = challenge.solves.length === 0;
+
     // update the challenge model to add the userId to the solves array
     if (!userSolved) {
       const updateChallengeSolves = await ChallengeModel.findOneAndUpdate(
@@ -104,6 +107,7 @@ exports.checkSubmittedFlag = async (req, res, next) => {
             solves: {
               user: userId,
               solvedAt: new Date(),
+              firstBlood: challengeNotSolvedBefore,
             },
           },
         },
@@ -130,17 +134,24 @@ exports.checkSubmittedFlag = async (req, res, next) => {
     );
 
     if (!challengeSolved) {
+      let updateObject = {
+        $addToSet: {
+          solves: {
+            challenge: challengeId,
+            solvedAt: new Date(),
+          },
+        },
+        $inc: { score: challenge.points }, // increment user score
+      };
+      if (challengeNotSolvedBefore) {
+        updateObject.$addToSet.firstBlood = {
+          challenge: challengeId,
+          solvedAt: new Date(),
+        };
+      }
       const updateUserSolves = await UserModel.findOneAndUpdate(
         { _id: userId },
-        {
-          $addToSet: {
-            solves: {
-              challenge: challengeId,
-              solvedAt: new Date(),
-            },
-          },
-          $inc: { score: challenge.points }, // increment user score
-        },
+        updateObject,
         { new: true }
       );
 

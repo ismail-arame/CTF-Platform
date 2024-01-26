@@ -43,7 +43,7 @@ export default function Login({}: Props) {
   // const onSubmit: SubmitHandler<FormSchemaType> = (data) => console.log(data);
   const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
     let res = await dispatch(loginUser({ ...data }));
-    if (res.payload.user) {
+    if (res.payload?.user) {
       Cookies.set("usertoken", res.payload.user.token);
       router.push("/challenges");
     }
