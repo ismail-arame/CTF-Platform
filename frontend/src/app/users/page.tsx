@@ -7,6 +7,7 @@ import { getUsers } from "@/redux/features/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Chakra_Petch, Lato } from "next/font/google";
 import { useEffect, useState } from "react";
+import { Triangle } from "react-loader-spinner";
 import { useMediaQuery } from "react-responsive";
 
 type Props = {};
@@ -17,8 +18,9 @@ const lato = Lato({ subsets: ["latin"], weight: "400" });
 export default function Users({}: Props) {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.user);
+  const { status } = useAppSelector((state) => state.user);
   const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState(null);
 
   // get users
   useEffect(() => {
@@ -65,13 +67,29 @@ export default function Users({}: Props) {
               Users
             </h1>
           </div>
-          <div className={`flex flex-col mb-8 `}>
-            <UsersSearchForm
-              users={users}
-              setFilteredUsers={setFilteredUsers}
-            />
-          </div>
-          <ListUsers filteredUsers={filteredUsers} />
+          {!filteredUsers ? (
+            <div className="w-full flex justify-center items-center">
+              <Triangle
+                visible={true}
+                height="80"
+                width="80"
+                color="#68C8DE"
+                ariaLabel="triangle-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            </div>
+          ) : (
+            <>
+              <div className={`flex flex-col mb-8 `}>
+                <UsersSearchForm
+                  users={users}
+                  setFilteredUsers={setFilteredUsers}
+                />
+              </div>
+              <ListUsers filteredUsers={filteredUsers} />
+            </>
+          )}
         </div>
       </div>
     </div>

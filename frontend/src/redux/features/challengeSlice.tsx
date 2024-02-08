@@ -92,6 +92,9 @@ export const challengeSlice = createSlice({
     setActiveChallenge: (state, action) => {
       state.activeChallenge = action.payload;
     },
+    clearChallenges: (state) => {
+      state.challenges = [];
+    },
     increaseChallengeSolves: (state, action: PayloadAction<userInfosType>) => {
       // Increase the challenge solves only for the active solved challenge
       const userId = action.payload.userId;
@@ -150,6 +153,6 @@ export const challengeSlice = createSlice({
   },
 });
 
-export const { setActiveChallenge, increaseChallengeSolves } =
+export const { setActiveChallenge, clearChallenges, increaseChallengeSolves } =
   challengeSlice.actions;
 export default challengeSlice.reducer;

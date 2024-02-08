@@ -59,6 +59,9 @@ export default function FlagSubmitForm({}: Props) {
     }
 
     setFlagSubmitResponse(res.payload);
+    const timerId = setTimeout(() => {
+      setFlagSubmitResponse("");
+    }, 3000);
   };
 
   return (

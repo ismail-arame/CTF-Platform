@@ -1,17 +1,17 @@
 import Category from "./Category";
 
-type Props = {};
+type Props = { challenges: any };
 
-export default function CategoriesContainer({}: Props) {
+export default function CategoriesContainer({ challenges }: Props) {
   return (
     <>
-      <Category categoryName="Pwn" />;
-      <Category categoryName="Crypto" />;
-      <Category categoryName="Web" />;
-      <Category categoryName="Rev" />;
-      <Category categoryName="Misc" />;
-      <Category categoryName="Forensics" />;
-      <Category categoryName="Malware Analysis" />;
+      <Category categoryName="Pwn" challenges={challenges} />;
+      <Category categoryName="Crypto" challenges={challenges} />;
+      <Category categoryName="Web" challenges={challenges} />;
+      <Category categoryName="Rev" challenges={challenges} />;
+      <Category categoryName="Misc" challenges={challenges} />;
+      <Category categoryName="Forensics" challenges={challenges} />;
+      <Category categoryName="Malware Analysis" challenges={challenges} />;
     </>
   );
 }

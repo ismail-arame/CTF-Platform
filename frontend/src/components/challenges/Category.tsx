@@ -6,12 +6,13 @@ import { challengeType } from "../../types/challengeType";
 
 type Props = {
   categoryName: string;
+  challenges: any;
 };
 
 const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
 
-export default function Category({ categoryName }: Props) {
-  const { challenges } = useAppSelector((state) => state.challenge);
+export default function Category({ categoryName, challenges }: Props) {
+  // const { challenges } = useAppSelector((state) => state.challenge);
   const { user } = useAppSelector((state) => state.user);
 
   //filtering challenges based on the categoryName

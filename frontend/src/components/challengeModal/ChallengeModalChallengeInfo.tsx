@@ -1,5 +1,6 @@
 import { Chakra_Petch, Sansita } from "next/font/google";
 import FlagSubmitForm from "./FlagSubmitForm";
+import Link from "next/link";
 
 type Props = {
   activeChallenge: any;
@@ -11,6 +12,25 @@ const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "600" });
 export default function ChallengeModalChallengeInfo({
   activeChallenge,
 }: Props) {
+  //handling ctf attachment files downloading
+  const handleDownload = () => {
+    const attachmentUrl = activeChallenge.attachmentUrl;
+
+    // Create an anchor element
+    const link = document.createElement("a");
+    link.href = attachmentUrl;
+    link.download = activeChallenge.attachmentZipName; // Specify the desired file name
+
+    // Append the anchor element to the document body
+    document.body.appendChild(link);
+
+    // Trigger the click event to start the download
+    link.click();
+
+    // Remove the anchor element from the document body
+    document.body.removeChild(link);
+  };
+
   return (
     <>
       {/* Challenge Model Name and points and Category */}
@@ -39,20 +59,28 @@ export default function ChallengeModalChallengeInfo({
           </div>
         </div>
         {/* Link*/}
-        <div className="text-[#68A3DE] mb-3 cursor-pointer transition-all duration-200 ease hover:text-[#427D9D]">
-          {activeChallenge.websiteLink}
-        </div>
+        <Link href={activeChallenge.websiteLink} target="_blank">
+          <div className="text-[#68A3DE] mb-3 cursor-pointer transition-all duration-200 ease hover:text-[#427D9D]">
+            {activeChallenge.websiteLink}
+          </div>
+        </Link>
       </div>
       {/* attachment */}
       <div className="flex justify-start items-start mb-3">
-        <div className="flex items-center justify-center px-3 py-2 bg-[#68C8DE] rounded-lg cursor-pointer mr-2 transition-all duration-200 ease hover:bg-[#427D9D]">
+        <a
+          href={activeChallenge.attachmentUrl}
+          download={activeChallenge.attachmentZipName}
+          target="_blank"
+          // onClick={handleDownload}
+          className="flex items-center justify-center px-3 py-2 bg-[#68C8DE] rounded-lg cursor-pointer mr-2 transition-all duration-200 ease hover:bg-[#427D9D]"
+        >
           <div className="mr-2">
             <i className="fa fa-download" aria-hidden="true"></i>
           </div>
           <div className="text-[12px] font-semibold">
             {activeChallenge.attachmentZipName}
           </div>
-        </div>
+        </a>
       </div>
       {/* Flag Submit */}
       <FlagSubmitForm />

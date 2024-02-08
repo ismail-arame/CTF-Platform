@@ -9,9 +9,13 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import AuthInput from "@/components/auth/AuthInput";
-import { registerUser } from "@/redux/features/userSlice";
+import {
+  clearAuthenticationError,
+  registerUser,
+} from "@/redux/features/userSlice";
 import Cookies from "js-cookie";
 import { useMediaQuery } from "react-responsive";
+import { useEffect, useState } from "react";
 
 // add numbers to username in the regex (remember to do later)
 const formSchema = z.object({
@@ -47,6 +51,23 @@ const lato = Lato({ subsets: ["latin"], weight: "400" });
 export default function Register({}: Props) {
   const dispatch = useAppDispatch();
   const { status, error } = useAppSelector((state) => state.user);
+  const [loginError, setLoginError] = useState(null);
+  // useEffect to set the loginError when the Redux error changes
+  useEffect(() => {
+    if (error) {
+      // Set the loginError state when there is an error from Redux
+      setLoginError(error);
+
+      // Set a timer to clear the loginError after 3000 milliseconds (3 seconds)
+      const timerId = setTimeout(() => {
+        setLoginError(null);
+        dispatch(clearAuthenticationError());
+      }, 3000);
+
+      // Cleanup function to clear the timer if the component unmounts or error changes
+      return () => clearTimeout(timerId);
+    }
+  }, [error]);
   const router = useRouter();
   const {
     register,
@@ -119,14 +140,30 @@ export default function Register({}: Props) {
                 register={register}
                 error={errors?.password?.message}
               />
+              {/* if we have an error */}
+              {loginError && (
+                <div>
+                  <p className=" text-red-400">{loginError}</p>
+                </div>
+              )}
               <div className="pt-3 mb-12">
                 <div className="flex justify-between">
                   <p></p>
                   <button
-                    className="text-white bg-[#68C8DE] border-[#68A3DE] rounded-[4px] px-12 py-[6px]"
+                    className="text-white bg-[#68C8DE] border-[#68A3DE] rounded-[4px] w-[146px] h-[36px]"
                     type="submit"
                   >
-                    Submit
+                    {status === "loading" ? (
+                      <div className="w-full flex justify-center items-center">
+                        <div
+                          className="mr-1 inline-block h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] text-[#fff] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                          role="status"
+                        ></div>
+                        <div className="text-[14px]">Processing...</div>
+                      </div>
+                    ) : (
+                      "Submit"
+                    )}
                   </button>
                 </div>
               </div>

@@ -12,6 +12,7 @@ import { Chakra_Petch, Lato, Sansita } from "next/font/google";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useParams } from "next/navigation";
+import { Triangle } from "react-loader-spinner";
 
 type Props = {};
 
@@ -66,7 +67,19 @@ export default function User({}: Props) {
                     ? "px-14"
                     : "px-7"
               }`}
-            ></div>
+            >
+              <div className="w-full flex justify-center items-center pt-[159px]">
+                <Triangle
+                  visible={true}
+                  height="80"
+                  width="80"
+                  color="#68C8DE"
+                  ariaLabel="triangle-loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+              </div>
+            </div>
           </div>
         </div>
       ) : (

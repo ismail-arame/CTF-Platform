@@ -10,6 +10,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Chakra_Petch, Lato, Sansita } from "next/font/google";
 import { useEffect, useState } from "react";
+import { Triangle } from "react-loader-spinner";
 import { useMediaQuery } from "react-responsive";
 
 type Props = {};
@@ -20,7 +21,7 @@ const lato = Lato({ subsets: ["latin"], weight: "400" });
 
 export default function User({}: Props) {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.user);
+  const { user, status } = useAppSelector((state) => state.user);
   const [userInfo, setUserInfo] = useState<any>();
   const values = { userId: user._id, token: user.token };
   // get users
@@ -31,7 +32,7 @@ export default function User({}: Props) {
         await dispatch(getScoreboard(user?.token));
         const res = await dispatch(getUserById(values));
         setUserInfo(res.payload);
-        console.log("getUserById res : ", res);
+        // console.log("getUserById res : ", res);
       }
     };
 
@@ -62,7 +63,19 @@ export default function User({}: Props) {
                     ? "px-14"
                     : "px-7"
               }`}
-            ></div>
+            >
+              <div className="w-full flex justify-center items-center pt-[159px]">
+                <Triangle
+                  visible={true}
+                  height="80"
+                  width="80"
+                  color="#68C8DE"
+                  ariaLabel="triangle-loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+              </div>
+            </div>
           </div>
         </div>
       ) : (

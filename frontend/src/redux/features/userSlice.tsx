@@ -76,7 +76,7 @@ export const getUsers = createAsyncThunk(
 
 // get user by id function
 export const getUserById = createAsyncThunk(
-  "/user/all",
+  "/user/userId",
   async (values: any, { rejectWithValue }) => {
     try {
       const { token, userId } = values;
@@ -137,6 +137,9 @@ export const userSlice = createSlice({
         ...(state.user.solves || []),
         { challenge: challengeId, solvedAt: new Date() },
       ];
+    },
+    clearAuthenticationError: (state) => {
+      state.error = "";
     },
   },
   extraReducers: (builder) => {
@@ -204,8 +207,24 @@ export const userSlice = createSlice({
       state.status = "failed";
       state.error = action.payload as any;
     });
+
+    /* _*************** getUserById *************** _*/
+    builder.addCase(getUserById.pending, (state) => {
+      state.status = "loading";
+    });
+
+    builder.addCase(getUserById.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.error = "";
+    });
+
+    builder.addCase(getUserById.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.payload as any;
+    });
   },
 });
 
-export const { logout, increaseUserSolves } = userSlice.actions;
+export const { logout, increaseUserSolves, clearAuthenticationError } =
+  userSlice.actions;
 export default userSlice.reducer;

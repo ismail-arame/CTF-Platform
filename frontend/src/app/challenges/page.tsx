@@ -9,6 +9,7 @@ import ChallengeModal from "@/components/challengeModal/ChallengeModal";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
 import { getChallenges } from "@/redux/features/challengeSlice";
+import { Triangle } from "react-loader-spinner";
 
 const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
 const lato = Lato({ subsets: ["latin"], weight: "400" });
@@ -20,6 +21,8 @@ export default function Challenges({}: Props) {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.user);
   const { activeChallenge } = useAppSelector((state) => state.challenge);
+  const { challenges } = useAppSelector((state) => state.challenge);
+  const { status } = useAppSelector((state) => state.challenge);
 
   // get challenges
   useEffect(() => {
@@ -48,10 +51,26 @@ export default function Challenges({}: Props) {
             Challenges
           </h1>
         </div>
-        {/* Categories Checkbox List*/}
-        <CategoriesCheckbox />
-        {/* Categories Challenges */}
-        <CategoriesContainer />
+        {!challenges ? (
+          <div className="w-full flex justify-center items-center">
+            <Triangle
+              visible={true}
+              height="80"
+              width="80"
+              color="#68C8DE"
+              ariaLabel="triangle-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          </div>
+        ) : (
+          <div className="">
+            {/* Categories Checkbox List*/}
+            <CategoriesCheckbox challenges={challenges} />
+            {/* Categories Challenges */}
+            <CategoriesContainer challenges={challenges} />
+          </div>
+        )}
       </div>
     </div>
   );

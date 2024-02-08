@@ -4,6 +4,8 @@ import { Chakra_Petch, Sansita } from "next/font/google";
 type Props = {
   categoryName: string;
   challengesNumber: number;
+  // categoryName: any;
+  // challengesNumber: any;
 };
 
 const sansita = Sansita({ subsets: ["latin"], weight: "400" });

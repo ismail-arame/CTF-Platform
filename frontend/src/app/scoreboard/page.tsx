@@ -11,6 +11,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Chakra_Petch, Lato, Sansita } from "next/font/google";
 import { useEffect, useState } from "react";
+import { Triangle } from "react-loader-spinner";
 import { useMediaQuery } from "react-responsive";
 
 type Props = {};
@@ -22,17 +23,20 @@ const lato = Lato({ subsets: ["latin"], weight: "400" });
 export default function Scoreboard({}: Props) {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.user);
-  const [users, setUsers] = useState([]);
+  const { status } = useAppSelector((state) => state.user);
+  const [users, setUsers] = useState(null);
+  // const [loading, setLoading] = useState(false);
 
   // calculates the rank of users based on their scores and updates the rank in databse accordingly
   useEffect(() => {
     const fetchData = async () => {
+      // setLoading(true);
       if (user?.token) {
         const res = await dispatch(getScoreboard(user?.token));
         setUsers(res.payload);
       }
+      // setLoading(false);
     };
-
     fetchData();
   }, [user]);
 
@@ -60,7 +64,11 @@ export default function Scoreboard({}: Props) {
           }`}
         >
           <div className="w-full pt-[64px] pb-[32px] bg-[#1a1c22]">
-            <div className="flex flex-col items-center mb-16">
+            <div
+              className={`flex flex-col items-center ${
+                status !== "loading" && "mb-16"
+              }`}
+            >
               <div
                 className={`${chakra_petch.className} ${
                   !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
@@ -70,7 +78,21 @@ export default function Scoreboard({}: Props) {
               </div>
             </div>
           </div>
-          <ListUsersRank users={users} />
+          {!users ? (
+            <div className="w-full flex justify-center items-center">
+              <Triangle
+                visible={true}
+                height="80"
+                width="80"
+                color="#68C8DE"
+                ariaLabel="triangle-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            </div>
+          ) : (
+            <ListUsersRank users={users} />
+          )}
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { FirstBloodIcon } from "@/app/svg";
 import { useAppSelector } from "@/redux/hooks";
 import { challengeType } from "@/types/challengeType";
 import { Chakra_Petch, Raleway, Sansita } from "next/font/google";
@@ -85,8 +86,15 @@ export default function ChallengeModalSolvesInfo({}: Props) {
                       {solve.user?.username}
                     </Link>
                   </div>
-                  <div className="text-white text-sm font-medium">
+                  <div
+                    className={`flex items-center ${
+                      solve.firstBlood ? "text-[#FC3535] ml-4" : "text-white"
+                    } text-sm font-medium`}
+                  >
                     {formatDate(new Date(solve.solvedAt))}
+                    <div className="ml-1">
+                      {solve.firstBlood && <FirstBloodIcon />}
+                    </div>
                   </div>
                 </div>
               </>

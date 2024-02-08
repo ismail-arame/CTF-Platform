@@ -1,3 +1,4 @@
+import { FirstBloodIcon } from "@/app/svg";
 import { Chakra_Petch, Sansita } from "next/font/google";
 
 type Props = {
@@ -75,6 +76,10 @@ export default function UserSolvedChallengesList({ userInfo }: Props) {
           {userInfo.solves &&
             userInfo.solves.length > 0 &&
             userInfo.solves.map((solve: any) => {
+              const isFirstBlood = userInfo.firstBlood.some(
+                (firstBloodItem: any) =>
+                  firstBloodItem.challenge === solve.challenge?._id
+              );
               return (
                 <div
                   key={solve._id}
@@ -98,9 +103,16 @@ export default function UserSolvedChallengesList({ userInfo }: Props) {
                   <div
                     className={`${sansita.className}  text-[#DDF2FD] hover:text-[#68A3DE] cursor-pointer`}
                   >
-                    <span className="pl-4">
+                    <div
+                      className={`flex items-center pl-4 ${
+                        isFirstBlood ? "text-[#FC3535] ml-4" : "text-white"
+                      }`}
+                    >
                       {formatDate(new Date(solve.solvedAt))}
-                    </span>
+                      <div className="ml-1">
+                        {isFirstBlood && <FirstBloodIcon />}
+                      </div>
+                    </div>
                   </div>
                 </div>
               );
