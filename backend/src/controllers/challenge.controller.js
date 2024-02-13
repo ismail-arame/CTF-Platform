@@ -52,7 +52,14 @@ exports.createChallenge = async (req, res, next) => {
 exports.getChallenges = async (req, res, next) => {
   try {
     const challenges = await findChallenges();
-    res.status(200).json(challenges);
+    // Remove the 'flag' property from each challenge object
+    const challengesWithoutFlags = challenges.map((challenge) => {
+      const challengeWithoutFlag = { ...challenge.toObject() };
+      delete challengeWithoutFlag.flag;
+      return challengeWithoutFlag;
+    });
+
+    res.status(200).json(challengesWithoutFlags);
   } catch (error) {
     next(error);
   }
@@ -67,7 +74,9 @@ exports.getChallengeById = async (req, res, next) => {
     }
 
     const challenge = await findChallengeById(challengeId);
-    res.status(200).json(challenge);
+    const challengeWithoutFlag = { ...challenge.toObject() };
+    delete challengeWithoutFlag.flag;
+    res.status(200).json(challengeWithoutFlag);
   } catch (error) {
     next(error);
   }
