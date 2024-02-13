@@ -21,6 +21,7 @@ exports.createChallenge = async (req, res, next) => {
       attachmentZipName,
       attachmentUrl,
       websiteLink,
+      difficulty,
       flag,
     } = req.body;
 
@@ -37,6 +38,7 @@ exports.createChallenge = async (req, res, next) => {
       attachmentZipName,
       attachmentUrl,
       websiteLink,
+      difficulty,
       flag: encryptedFlag,
     };
 

@@ -7,6 +7,7 @@ const compression = require("compression");
 const fileupload = require("express-fileupload");
 const cors = require("cors");
 const routes = require("./routes/index");
+const rateLimit = require("express-rate-limit");
 const createHttpError = require("http-errors");
 
 const app = express();
@@ -23,7 +24,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//sanitice mongo request data
+//sanitize mongo request data
 app.use(mongoSanitize());
 
 // cookie parser
@@ -41,6 +42,21 @@ app.use(
 
 //cors
 app.use(cors());
+
+// rate limiting middleware
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 2,
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+  message: {
+    error: {
+      status: 429,
+      message: "Rate limit exceeded. Please try again later.",
+    },
+  },
+});
+// app.use(limiter);
 
 //routes
 app.use("/", routes);
