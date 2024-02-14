@@ -58,6 +58,10 @@ const limiter = rateLimit({
 });
 // app.use(limiter);
 
+app.get("/", (req, res) => {
+  res.send("Hey this is my API running 🥳");
+});
+
 //routes
 app.use("/", routes);
 
