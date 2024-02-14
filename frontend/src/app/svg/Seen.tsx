@@ -1,6 +1,6 @@
-import { classNameType } from "@/types/classnameType";
+// import { classNameType } from "@/types/classnameType";
 
-export default function SeenIcon({ className }: classNameType) {
+export default function SeenIcon({ className }: any) {
   return (
     <svg
       viewBox="0 0 18 18"

@@ -1,7 +1,7 @@
 import React from "react";
-import { classNameType } from "@/types/classnameType";
+// import { classNameType } from "@/types/classnameType";
 
-function SearchLargeIcon({ className, height, width }: classNameType) {
+function SearchLargeIcon({ className, height, width }: any) {
   return (
     <svg
       width={`${width ? width : "24"}`}

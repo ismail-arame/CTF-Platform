@@ -1,7 +1,7 @@
 import React from "react";
-import { classNameType } from "@/types/classnameType";
+// import { classNameType } from "@/types/classnameType";
 
-export default function ChatIcon({ className }: classNameType) {
+export default function ChatIcon({ className }: any) {
   return (
     <svg
       viewBox="0 0 24 24"

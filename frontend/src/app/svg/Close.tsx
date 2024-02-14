@@ -1,7 +1,7 @@
 import React from "react";
-import { classNameType } from "@/types/classnameType";
+// import { classNameType } from "@/types/classnameType";
 
-export default function CloseIcon({ className, isTablet }: classNameType) {
+export default function CloseIcon({ className, isTablet }: any) {
   return (
     <svg
       viewBox="0 0 24 24"

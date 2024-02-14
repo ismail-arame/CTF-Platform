@@ -1,7 +1,7 @@
 import React from "react";
-import { classNameType } from "@/types/classnameType";
+// import { classNameType } from "@/types/classnameType";
 
-export default function DotsIcon({ className, height, width }: classNameType) {
+export default function DotsIcon({ className, height, width }: any) {
   return (
     <svg
       viewBox="0 0 24 24"

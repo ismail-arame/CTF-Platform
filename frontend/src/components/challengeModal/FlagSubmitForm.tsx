@@ -65,7 +65,7 @@ export default function FlagSubmitForm({}: Props) {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col pr-1">
       <form onSubmit={handleSubmit(onSubmit)}>
         <FlagInput
           name="flag"

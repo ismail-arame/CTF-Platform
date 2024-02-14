@@ -87,7 +87,7 @@ export default function Login({}: Props) {
           <h1
             className={`${chakra_petch.className} ${
               !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
-            } text-white tracking-[2px] font-medium`}
+            } text-white tracking-[2px] font-medium forbidden`}
           >
             Login
           </h1>

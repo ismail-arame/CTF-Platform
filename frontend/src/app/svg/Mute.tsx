@@ -1,7 +1,7 @@
 import React from "react";
-import { classNameType } from "@/types/classnameType";
+// import { classNameType } from "@/types/classnameType";
 
-function MuteIcon({ className }: classNameType) {
+function MuteIcon({ className }: any) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="35">
       <g className={className}>

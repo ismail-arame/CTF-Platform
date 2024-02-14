@@ -1,6 +1,6 @@
-import { classNameType } from "@/types/classnameType";
+// import { classNameType } from "@/types/classnameType";
 
-export default function StoryIcon({ className, active }: classNameType) {
+export default function StoryIcon({ className, active }: any) {
   if (active) {
     return (
       <svg

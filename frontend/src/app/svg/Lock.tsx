@@ -1,7 +1,7 @@
 import React from "react";
-import { classNameType } from "@/types/classnameType";
+// import { classNameType } from "@/types/classnameType";
 
-function LockIcon({ className }: classNameType) {
+function LockIcon({ className }: any) {
   return (
     <svg width="24" height="24" viewBox="0 0 28 35">
       <path

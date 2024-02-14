@@ -1,9 +1,6 @@
-import { classNameType } from "@/types/classnameType";
+// import { classNameType } from "@/types/classnameType";
 
-export default function NotificationIcon({
-  className,
-  isTablet,
-}: classNameType) {
+export default function NotificationIcon({ className, isTablet }: any) {
   return (
     <svg
       viewBox="0 0 48 48"

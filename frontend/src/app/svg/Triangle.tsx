@@ -1,6 +1,6 @@
-import { classNameType } from "@/types/classnameType";
+// import { classNameType } from "@/types/classnameType";
 
-function TriangleIcon({ className }: classNameType) {
+function TriangleIcon({ className }: any) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

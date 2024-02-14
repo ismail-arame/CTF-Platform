@@ -1,6 +1,6 @@
-import { classNameType } from "@/types/classnameType";
+// import { classNameType } from "@/types/classnameType";
 
-function CallIcon({ className }: classNameType) {
+function CallIcon({ className }: any) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="40">
       <path

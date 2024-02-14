@@ -35,6 +35,24 @@ export default function Challenges({}: Props) {
   const isScreenBelow700px = useMediaQuery({
     query: "(max-width: 700px)",
   });
+
+  // Assuming the competition end date is "2024-03-09T00:00:00.000Z"
+  const competitionStartDate = new Date("2024-02-14T16:30:00.000Z");
+  const competitionEndDate = new Date("2024-02-14T18:00:00.000Z");
+
+  const isDateWithinCompetitionInterval =
+    new Date() >= competitionStartDate && new Date() <= competitionEndDate;
+
+  // Check if the current date is after the competition end date
+  const isCompetitionStarted = new Date() < competitionStartDate;
+  const isCompetitionEnded = new Date() > competitionEndDate;
+  console.log(
+    `new Date() => ${new Date()} and start date ${competitionStartDate} and end Date => ${competitionEndDate}`
+  );
+  console.log(
+    "is competition within interval : ",
+    isDateWithinCompetitionInterval
+  );
   return (
     <div className="min-h-screen w-screen bg-[#1a1c22] overflow-y-hidden">
       {activeChallenge._id && (
@@ -46,12 +64,20 @@ export default function Challenges({}: Props) {
           <h1
             className={`${chakra_petch.className} ${
               !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
-            } text-white tracking-[2px] font-medium`}
+            } text-white tracking-[2px] font-medium forbidden`}
           >
             Challenges
           </h1>
         </div>
-        {!challenges ? (
+        {isCompetitionStarted ? (
+          <h2 className="flex justify-center items-center text-3xl black-forbidden">
+            Get ready! The competition is on its way
+          </h2>
+        ) : isCompetitionEnded ? (
+          <h2 className="flex justify-center items-center text-3xl black-forbidden">
+            Forbidden Competition is over
+          </h2>
+        ) : !challenges ? (
           <div className="w-full flex justify-center items-center">
             <Triangle
               visible={true}
@@ -75,3 +101,24 @@ export default function Challenges({}: Props) {
     </div>
   );
 }
+
+// {!challenges ? (
+//   <div className="w-full flex justify-center items-center">
+//     <Triangle
+//       visible={true}
+//       height="80"
+//       width="80"
+//       color="#68C8DE"
+//       ariaLabel="triangle-loading"
+//       wrapperStyle={{}}
+//       wrapperClass=""
+//     />
+//   </div>
+// ) : (
+//   <div className="">
+//     {/* Categories Checkbox List*/}
+//     <CategoriesCheckbox challenges={challenges} />
+//     {/* Categories Challenges */}
+//     <CategoriesContainer challenges={challenges} />
+//   </div>
+// )}

@@ -72,7 +72,7 @@ export default function Scoreboard({}: Props) {
               <div
                 className={`${chakra_petch.className} ${
                   !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
-                } text-white tracking-[2px] font-medium mb-2`}
+                } text-white tracking-[2px] font-medium mb-2 forbidden`}
               >
                 Scoreboard
               </div>

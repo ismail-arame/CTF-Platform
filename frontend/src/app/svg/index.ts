@@ -1,4 +1,3 @@
-import CommunityIcon from "./Community";
 import StoryIcon from "./Story";
 import ChatIcon from "./Chat";
 import NotificationIcon from "./Notification";
@@ -11,7 +10,6 @@ import SeenIcon from "./Seen";
 import Logo from "./Logo";
 import ReturnIcon from "./Return";
 import SearchLargeIcon from "./SearchLarge";
-import EmojiIcon from "./Emoji";
 import AttachmentIcon from "./Attachment";
 import SendIcon from "./Send";
 import PhotoIcon from "./Photo";
@@ -34,7 +32,6 @@ export {
   ChallengeIcon,
   PointsIcon,
   TriangleIcon,
-  CommunityIcon,
   StoryIcon,
   ChatIcon,
   NotificationIcon,
@@ -47,7 +44,6 @@ export {
   Logo,
   ReturnIcon,
   SearchLargeIcon,
-  EmojiIcon,
   AttachmentIcon,
   SendIcon,
   PhotoIcon,
