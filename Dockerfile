@@ -17,6 +17,9 @@ COPY backend/ backend/
 
 USER node
 
-CMD [ "npm", "start", "--prefix", "backend" ]
+CMD ["npm", "run", "--prefix", "backend", "start-both"]
 
-EXPOSE 8000
+EXPOSE 8000 80
+
+# docker build -t image-name .
+# docker run -p 8000:8000 -p 80:80 image-name
