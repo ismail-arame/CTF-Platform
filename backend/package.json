@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "start-both": "concurrently --kill-others-on-fail \"npm start --prefix backend\" \"npm start --prefix frontend\"",
+    "start-both": "concurrently --kill-others-on-fail \"npm start --prefix /app/backend\" \"npm start --prefix /app/frontend\"",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js"
   },
   "author": "",
