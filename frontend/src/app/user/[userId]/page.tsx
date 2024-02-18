@@ -8,7 +8,12 @@ import {
   getUsers,
 } from "@/redux/features/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { Chakra_Petch, Lato, Sansita } from "next/font/google";
+import {
+  Chakra_Petch,
+  Fredericka_the_Great,
+  Lato,
+  Sansita,
+} from "next/font/google";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useParams } from "next/navigation";
@@ -16,13 +21,18 @@ import { Triangle } from "react-loader-spinner";
 
 type Props = {};
 
-const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
+// const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
+const Fredericka = Fredericka_the_Great({
+  subsets: ["latin"],
+  weight: "400",
+});
 const sansita = Sansita({ subsets: ["latin"], weight: "400" });
 const lato = Lato({ subsets: ["latin"], weight: "400" });
 
 export default function User({}: Props) {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.user);
+  const { activeChallenge } = useAppSelector((state) => state.challenge);
   const [userInfo, setUserInfo] = useState<any>();
   // Get User_Id from the Pathname
   const params = useParams();
@@ -98,7 +108,7 @@ export default function User({}: Props) {
               <div className="w-full pt-[64px] pb-[32px] bg-[#1a1c22]">
                 <div className="flex flex-col items-center mb-16">
                   <div
-                    className={`${chakra_petch.className} ${
+                    className={`${Fredericka.className} ${
                       !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
                     } text-white tracking-[2px] font-medium mb-2 forbidden`}
                   >

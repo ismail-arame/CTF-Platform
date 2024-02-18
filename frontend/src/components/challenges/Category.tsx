@@ -10,6 +10,10 @@ type Props = {
 };
 
 const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
+// const chakra_petch = Fredericka_the_Great({
+//   subsets: ["latin"],
+//   weight: "400",
+// });
 
 export default function Category({ categoryName, challenges }: Props) {
   // const { challenges } = useAppSelector((state) => state.challenge);

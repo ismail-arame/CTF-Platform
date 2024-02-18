@@ -1,11 +1,15 @@
 import { FirstBloodIcon } from "@/app/svg";
-import { Chakra_Petch, Sansita } from "next/font/google";
+import { Chakra_Petch, Fredericka_the_Great, Sansita } from "next/font/google";
 
 type Props = {
   userInfo: any;
 };
 
 const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "600" });
+const Fredericka = Fredericka_the_Great({
+  subsets: ["latin"],
+  weight: "400",
+});
 const sansita = Sansita({ subsets: ["latin"], weight: "400" });
 
 export default function UserSolvedChallengesList({ userInfo }: Props) {
@@ -47,7 +51,7 @@ export default function UserSolvedChallengesList({ userInfo }: Props) {
       {userInfo.solves && userInfo.solves.length > 0 ? (
         <div className="flex flex-col">
           <div
-            className={`${chakra_petch.className} text-[#68C8DE] font-semibold text-[26px] mb-4 tracking-[1px]`}
+            className={`${Fredericka.className} text-[#68C8DE] font-semibold text-[26px] mb-4 tracking-[1px]`}
           >
             Solves
           </div>

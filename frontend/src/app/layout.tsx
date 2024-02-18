@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className}`}>
         <NextTopLoader color="#68C8DE" height={2} />
         <Providers>{children}</Providers>
       </body>

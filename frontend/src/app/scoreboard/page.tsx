@@ -9,14 +9,23 @@ import {
   getUsers,
 } from "@/redux/features/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { Chakra_Petch, Lato, Sansita } from "next/font/google";
+import {
+  Chakra_Petch,
+  Fredericka_the_Great,
+  Lato,
+  Sansita,
+} from "next/font/google";
 import { useEffect, useState } from "react";
 import { Triangle } from "react-loader-spinner";
 import { useMediaQuery } from "react-responsive";
 
 type Props = {};
 
-const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
+// const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
+const Fredericka = Fredericka_the_Great({
+  subsets: ["latin"],
+  weight: "400",
+});
 const sansita = Sansita({ subsets: ["latin"], weight: "400" });
 const lato = Lato({ subsets: ["latin"], weight: "400" });
 
@@ -24,6 +33,7 @@ export default function Scoreboard({}: Props) {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.user);
   const { status } = useAppSelector((state) => state.user);
+  const { activeChallenge } = useAppSelector((state) => state.challenge);
   const [users, setUsers] = useState(null);
   // const [loading, setLoading] = useState(false);
 
@@ -70,7 +80,7 @@ export default function Scoreboard({}: Props) {
               }`}
             >
               <div
-                className={`${chakra_petch.className} ${
+                className={`${Fredericka.className} ${
                   !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
                 } text-white tracking-[2px] font-medium mb-2 forbidden`}
               >

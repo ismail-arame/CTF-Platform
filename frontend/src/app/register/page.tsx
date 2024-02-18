@@ -1,7 +1,12 @@
 "use client";
 
 import Navbar from "@/components/navbar/Navbar";
-import { Raleway, Lato, Chakra_Petch } from "next/font/google";
+import {
+  Raleway,
+  Lato,
+  Chakra_Petch,
+  Fredericka_the_Great,
+} from "next/font/google";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -45,7 +50,11 @@ type FormSchemaType = z.infer<typeof formSchema>;
 type Props = {};
 
 // const raleway = Raleway({ subsets: ["latin"], weight: "400" });
-const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
+// const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
+const Fredericka = Fredericka_the_Great({
+  subsets: ["latin"],
+  weight: "400",
+});
 const lato = Lato({ subsets: ["latin"], weight: "400" });
 
 export default function Register({}: Props) {
@@ -101,7 +110,7 @@ export default function Register({}: Props) {
         {/* Register Title */}
         <div className="w-full flex items-center justify-center py-[64px] px-[32px] bg-[#1a1c22] mb-8">
           <h1
-            className={`${chakra_petch.className} ${
+            className={`${Fredericka.className} ${
               !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
             } text-white tracking-[2px] font-medium forbidden`}
           >

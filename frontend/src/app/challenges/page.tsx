@@ -2,7 +2,7 @@
 
 import CategoriesCheckbox from "@/components/challenges/CategoriesCheckbox";
 import LoggedinNavbar from "@/components/navbar/LoggedinNavbar";
-import { Chakra_Petch, Lato } from "next/font/google";
+import { Chakra_Petch, Fredericka_the_Great, Lato } from "next/font/google";
 import CategoriesContainer from "@/components/challenges/CategoriesContainer";
 import { useMediaQuery } from "react-responsive";
 import ChallengeModal from "@/components/challengeModal/ChallengeModal";
@@ -10,22 +10,30 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
 import { getChallenges } from "@/redux/features/challengeSlice";
 import { Triangle } from "react-loader-spinner";
+import { getCompetitionDate } from "@/redux/features/competitionDateSlice";
 
-const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
+// const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
+const chakra_petch = Fredericka_the_Great({
+  subsets: ["latin"],
+  weight: "400",
+});
 const lato = Lato({ subsets: ["latin"], weight: "400" });
 
 type Props = {};
 
 // when we have challenges and screen is above h-screen change h-screen to h-full
 export default function Challenges({}: Props) {
-  const dispatch = useAppDispatch();
+  const dispatch: any = useAppDispatch();
   const { user } = useAppSelector((state) => state.user);
   const { activeChallenge } = useAppSelector((state) => state.challenge);
   const { challenges } = useAppSelector((state) => state.challenge);
-  const { status } = useAppSelector((state) => state.challenge);
+  const { competitionStartDate, competitionEndDate } = useAppSelector(
+    (state) => state.competitionDate
+  );
 
-  // get challenges
+  // get challenges and get competitionDate
   useEffect(() => {
+    dispatch(getCompetitionDate());
     if (user?.token) {
       dispatch(getChallenges(user.token));
     }
@@ -37,15 +45,18 @@ export default function Challenges({}: Props) {
   });
 
   // Assuming the competition end date is "2024-03-09T00:00:00.000Z"
-  const competitionStartDate = new Date("2024-02-14T16:30:00.000Z");
-  const competitionEndDate = new Date("2024-02-14T18:00:00.000Z");
+  // const competitionStartDate = new Date("2024-02-15T15:18:00.000Z");
+  // const competitionEndDate = new Date("2024-02-16T18:00:00.000Z");
 
+  // const isDateWithinCompetitionInterval =
+  // new Date() >= competitionStartDate && new Date() <= competitionEndDate;
   const isDateWithinCompetitionInterval =
-    new Date() >= competitionStartDate && new Date() <= competitionEndDate;
+    new Date() >= new Date(competitionStartDate) &&
+    new Date() <= new Date(competitionEndDate);
 
   // Check if the current date is after the competition end date
-  const isCompetitionStarted = new Date() < competitionStartDate;
-  const isCompetitionEnded = new Date() > competitionEndDate;
+  const isCompetitionStarted = new Date() < new Date(competitionStartDate);
+  const isCompetitionEnded = new Date() > new Date(competitionEndDate);
   console.log(
     `new Date() => ${new Date()} and start date ${competitionStartDate} and end Date => ${competitionEndDate}`
   );
@@ -66,18 +77,11 @@ export default function Challenges({}: Props) {
               !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
             } text-white tracking-[2px] font-medium forbidden`}
           >
+            {/* {isDateWithinCompetitionInterval ? "Challenges" : "Forbidden"} */}
             Challenges
           </h1>
         </div>
-        {isCompetitionStarted ? (
-          <h2 className="flex justify-center items-center text-3xl black-forbidden">
-            Get ready! The competition is on its way
-          </h2>
-        ) : isCompetitionEnded ? (
-          <h2 className="flex justify-center items-center text-3xl black-forbidden">
-            Forbidden Competition is over
-          </h2>
-        ) : !challenges ? (
+        {!competitionStartDate || !competitionEndDate || !challenges ? (
           <div className="w-full flex justify-center items-center">
             <Triangle
               visible={true}
@@ -89,6 +93,14 @@ export default function Challenges({}: Props) {
               wrapperClass=""
             />
           </div>
+        ) : isCompetitionStarted ? (
+          <h2 className="flex justify-center items-center text-3xl black-forbidden">
+            SICSCTF 2024 has not started yet
+          </h2>
+        ) : isCompetitionEnded ? (
+          <h2 className="flex justify-center items-center text-[42px] black-forbidden">
+            Competition is over
+          </h2>
         ) : (
           <div className="">
             {/* Categories Checkbox List*/}
