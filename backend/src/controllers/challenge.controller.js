@@ -8,6 +8,9 @@ const {
 } = require("../services/challenge.service");
 const { ChallengeModel, UserModel } = require("../models");
 const { findUserById } = require("../services/user.service");
+const {
+  getCompetitionInterval,
+} = require("../services/competitionDate.service");
 
 exports.createChallenge = async (req, res, next) => {
   try {
@@ -85,6 +88,13 @@ exports.getChallengeById = async (req, res, next) => {
 exports.checkSubmittedFlag = async (req, res, next) => {
   try {
     const { flag, challengeId, userId } = req.body;
+
+    // get the start and end dates frmo database and check if the competition is running or not if not no flags accepted
+    const isDateWithinCompetitionInterval = await getCompetitionInterval();
+
+    if (!isDateWithinCompetitionInterval) {
+      throw createHttpError.BadRequest("Competition is over");
+    }
 
     // *_*_*_*_*_*_*_*_* Compare Submitted Flag and Database Flag *_*_*_*_*_*_*_*_*
     //get the challenge from db by its id

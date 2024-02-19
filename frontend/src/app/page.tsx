@@ -37,12 +37,17 @@ export default function Home() {
   const { competitionStartDate, competitionEndDate } = useAppSelector(
     (state) => state.competitionDate
   );
+  const [isCompetitionEnded, setIsCompetitionEnded] = useState(false);
   // Countdown timer state
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
+  });
+
+  const isScreenBelow900px = useMediaQuery({
+    query: "(max-width: 900px)",
   });
 
   // Responsiveness
@@ -61,6 +66,9 @@ export default function Home() {
     } else if (new Date() >= new Date(competitionStartDate)) {
       countDownDate = new Date(competitionEndDate).getTime();
     }
+
+    // const isCompetitionEnded = new Date() > new Date(competitionEndDate);
+    setIsCompetitionEnded(new Date() > new Date(competitionEndDate));
     const intervalId = setInterval(() => {
       const now = new Date().getTime();
       const distance = countDownDate - now;
@@ -88,7 +96,7 @@ export default function Home() {
   }, [competitionStartDate, competitionEndDate]);
 
   return (
-    <div className="relative h-screen w-screen bg-[#1a1c22] overflow-y-hidden">
+    <div className="relative min-h-screen w-screen bg-[#1a1c22]">
       <div className={`${!activeChallenge._id && "scanline"}`}></div>
       <div
         className={`${
@@ -100,19 +108,32 @@ export default function Home() {
       <div className="w-full flex flex-col items-center justify-center pt-[64px] pb-[32px] px-[32px] bg-[#1a1c22]">
         <h1
           className={`${Fredericka.className} ${
-            !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
+            !isScreenBelow900px ? "text-[42px]" : "text-[34px] mb-6"
           } text-white tracking-[2px] font-medium forbidden`}
         >
           ENSAO CTF 2024
         </h1>
-        <div className="flex items-center justify-center">
+        <div
+          className={`flex ${
+            isScreenBelow900px ? "flex-col" : ""
+          } items-center justify-center`}
+        >
           <div className="flex justify-center items-center mr-10">
-            <Image
-              src="/LOGO_WHITE.png"
-              alt="logo img"
-              width={400}
-              height={400}
-            />
+            {!isScreenBelow900px ? (
+              <Image
+                src="/LOGO_WHITE.png"
+                alt="logo img"
+                width={400}
+                height={400}
+              />
+            ) : (
+              <Image
+                src="/LOGO_WHITE.png"
+                alt="logo img"
+                width={300}
+                height={300}
+              />
+            )}
           </div>
           <div className="flex flex-col">
             <div
@@ -155,7 +176,7 @@ export default function Home() {
                   role="status"
                 ></div>
               </div>
-            ) : (
+            ) : !isCompetitionEnded ? (
               <div
                 className={`flex-col justify-center items-center text-white mt-6`}
               >
@@ -200,6 +221,12 @@ export default function Home() {
                     <div className={`${chakra_petch.className}`}>Seconds</div>
                   </div>
                 </div>
+              </div>
+            ) : (
+              <div
+                className={`${Fredericka.className} flex justify-center items-center text-[32px] text-white tracking-[2px] font-medium forbidden mt-8`}
+              >
+                Competition is Over
               </div>
             )}
             {/* Countdown Timer */}

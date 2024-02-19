@@ -13,7 +13,7 @@ const {
 // rate limiting middleware
 const SubmitFlagLimiter = rateLimit({
   windowMs: 1 * 60 * 1000,
-  max: 2,
+  max: 4,
   standardHeaders: "draft-7",
   legacyHeaders: false,
   message: {

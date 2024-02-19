@@ -16,3 +16,16 @@ exports.findCompetitionDate = async () => {
   const competitionDate = await CompetitionDateModel.find({});
   return competitionDate;
 };
+
+exports.getCompetitionInterval = async () => {
+  const competitionDate = await CompetitionDateModel.find({});
+  const isDateWithinCompetitionInterval =
+    new Date() >= new Date(competitionDate[0].competitionStartDate) &&
+    new Date() <= new Date(competitionDate[0].competitionEndDate);
+
+  console.log(
+    "is date within competition interval : ",
+    isDateWithinCompetitionInterval
+  );
+  return isDateWithinCompetitionInterval;
+};

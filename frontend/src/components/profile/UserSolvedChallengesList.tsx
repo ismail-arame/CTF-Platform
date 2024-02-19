@@ -1,5 +1,11 @@
 import { FirstBloodIcon } from "@/app/svg";
-import { Chakra_Petch, Fredericka_the_Great, Sansita } from "next/font/google";
+import {
+  Black_Ops_One,
+  Chakra_Petch,
+  Fredericka_the_Great,
+  Sansita,
+} from "next/font/google";
+import { useMediaQuery } from "react-responsive";
 
 type Props = {
   userInfo: any;
@@ -11,8 +17,13 @@ const Fredericka = Fredericka_the_Great({
   weight: "400",
 });
 const sansita = Sansita({ subsets: ["latin"], weight: "400" });
+const blackOpsOne = Black_Ops_One({ subsets: ["latin"], weight: "400" });
 
 export default function UserSolvedChallengesList({ userInfo }: Props) {
+  const isScreenBelow700px = useMediaQuery({
+    query: "(max-width: 700px)",
+  });
+
   // date formatting function
   const formatDate = (date: Date): string => {
     const options: Intl.DateTimeFormatOptions = {
@@ -124,7 +135,15 @@ export default function UserSolvedChallengesList({ userInfo }: Props) {
         </div>
       ) : (
         <div className="flex items-center justify-center">
-          <div className="text-3xl text-[#68A3DE]">No Solves Yet</div>
+          <div
+            className={`${
+              blackOpsOne.className
+            } flex justify-center items-center ${
+              isScreenBelow700px ? "text-[24px]" : "text-[34px]"
+            } text-white`}
+          >
+            No Solves Yet
+          </div>
         </div>
       )}
     </>

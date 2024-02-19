@@ -2,7 +2,12 @@
 
 import CategoriesCheckbox from "@/components/challenges/CategoriesCheckbox";
 import LoggedinNavbar from "@/components/navbar/LoggedinNavbar";
-import { Chakra_Petch, Fredericka_the_Great, Lato } from "next/font/google";
+import {
+  Chakra_Petch,
+  Fredericka_the_Great,
+  Lato,
+  Black_Ops_One,
+} from "next/font/google";
 import CategoriesContainer from "@/components/challenges/CategoriesContainer";
 import { useMediaQuery } from "react-responsive";
 import ChallengeModal from "@/components/challengeModal/ChallengeModal";
@@ -12,8 +17,8 @@ import { getChallenges } from "@/redux/features/challengeSlice";
 import { Triangle } from "react-loader-spinner";
 import { getCompetitionDate } from "@/redux/features/competitionDateSlice";
 
-// const chakra_petch = Chakra_Petch({ subsets: ["latin"], weight: "500" });
-const chakra_petch = Fredericka_the_Great({
+const blackOpsOne = Black_Ops_One({ subsets: ["latin"], weight: "400" });
+const Fredericka = Fredericka_the_Great({
   subsets: ["latin"],
   weight: "400",
 });
@@ -73,7 +78,7 @@ export default function Challenges({}: Props) {
         <LoggedinNavbar lato={lato} />
         <div className="w-full flex items-center justify-center pt-[64px] pb-[32px] px-[32px] bg-[#1a1c22]">
           <h1
-            className={`${chakra_petch.className} ${
+            className={`${Fredericka.className} ${
               !isScreenBelow700px ? "text-[42px]" : "text-[38px]"
             } text-white tracking-[2px] font-medium forbidden`}
           >
@@ -94,12 +99,14 @@ export default function Challenges({}: Props) {
             />
           </div>
         ) : isCompetitionStarted ? (
-          <h2 className="flex justify-center items-center text-3xl black-forbidden">
+          <h2
+            className={`${
+              blackOpsOne.className
+            } flex justify-center items-center ${
+              isScreenBelow700px ? "text-[24px]" : "text-[34px]"
+            } text-white`}
+          >
             SICSCTF 2024 has not started yet
-          </h2>
-        ) : isCompetitionEnded ? (
-          <h2 className="flex justify-center items-center text-[42px] black-forbidden">
-            Competition is over
           </h2>
         ) : (
           <div className="">
