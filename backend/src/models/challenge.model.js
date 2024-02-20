@@ -34,6 +34,14 @@ const challengeSchema = mongoose.Schema(
       required: [true, "Challenge description is required"],
       trim: true,
     },
+    flagFormat: {
+      type: String,
+      trim: true,
+    },
+    flagExemple: {
+      type: String,
+      trim: true,
+    },
     author: {
       type: String,
       required: [true, "Challenge author is required"],

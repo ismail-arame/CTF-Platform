@@ -13,6 +13,8 @@ export type challengeType = {
     | "Forensics"
     | "Malware Analysis";
   description: string;
+  flagFormat?: string;
+  flagExemple?: string;
   author: string;
   hints: string[];
   attachmentZipName: string;

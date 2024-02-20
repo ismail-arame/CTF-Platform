@@ -17,6 +17,8 @@ const initialState: {
     points: 0,
     category: "Pwn",
     description: "",
+    flagFormat: "",
+    flagExemple: "",
     author: "",
     hints: [],
     attachmentZipName: "",

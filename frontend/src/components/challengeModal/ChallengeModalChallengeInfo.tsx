@@ -91,6 +91,32 @@ export default function ChallengeModalChallengeInfo({
         {activeChallenge.description && (
           <p className="text-white mb-3">{activeChallenge.description}</p>
         )}
+        {/* Flag Format */}
+        {activeChallenge.flagFormat && (
+          <div className="flex flex-col">
+            <p
+              className={`${chakra_petch.className} text-lg text-[#68C8DE] mb-[2px]`}
+            >
+              Flag Format
+            </p>
+            <p className="text-[15px] text-white mb-[2px]">
+              {activeChallenge.flagFormat}
+            </p>
+          </div>
+        )}
+        {/* Flag Exemple */}
+        {activeChallenge.flagExemple && (
+          <div className="flex flex-col">
+            <p
+              className={`${chakra_petch.className} text-lg text-[#68C8DE] mb-[2px]`}
+            >
+              Flag Exemple
+            </p>
+            <p className="text-[15px] text-white mb-2">
+              {activeChallenge.flagExemple}
+            </p>
+          </div>
+        )}
         {/* Author */}
         <div className="text-white mb-3 flex">
           Author:{" "}
