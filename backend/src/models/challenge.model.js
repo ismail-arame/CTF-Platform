@@ -20,10 +20,12 @@ const challengeSchema = mongoose.Schema(
       enum: [
         "Pwn",
         "Crypto",
+        "Osint",
         "Web",
         "Rev",
         "Misc",
         "Forensics",
+        "Steganography",
         "Malware Analysis",
       ], //enum => only those values inside it can be used
       required: [true, "Challenge category is required"],
