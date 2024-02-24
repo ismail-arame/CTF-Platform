@@ -127,9 +127,7 @@ export default function Login({}: Props) {
               )}
               <div className="pt-3 mb-12">
                 <div className="flex justify-between">
-                  <p className="text-[#68C8DE] cursor-pointer">
-                    Forgot you password?
-                  </p>
+                  <p className="text-[#68C8DE] cursor-pointer"></p>
                   <button
                     className="flex items-center justify-center text-white bg-[#68C8DE] border-[#68A3DE] rounded-[4px] w-[146px] h-[36px]"
                     type="submit"

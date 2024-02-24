@@ -12,7 +12,7 @@ import CategoriesContainer from "@/components/challenges/CategoriesContainer";
 import { useMediaQuery } from "react-responsive";
 import ChallengeModal from "@/components/challengeModal/ChallengeModal";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getChallenges } from "@/redux/features/challengeSlice";
 import { Triangle } from "react-loader-spinner";
 import { getCompetitionDate } from "@/redux/features/competitionDateSlice";
@@ -35,6 +35,8 @@ export default function Challenges({}: Props) {
   const { competitionStartDate, competitionEndDate } = useAppSelector(
     (state) => state.competitionDate
   );
+  const [categoryClicked, setCategoryCliked] = useState("");
+  console.log("categ : ", categoryClicked);
 
   // get challenges and get competitionDate
   useEffect(() => {
@@ -111,9 +113,16 @@ export default function Challenges({}: Props) {
         ) : (
           <div className="">
             {/* Categories Checkbox List*/}
-            <CategoriesCheckbox challenges={challenges} />
+            <CategoriesCheckbox
+              challenges={challenges}
+              categoryClicked={categoryClicked}
+              setCategoryCliked={setCategoryCliked}
+            />
             {/* Categories Challenges */}
-            <CategoriesContainer challenges={challenges} />
+            <CategoriesContainer
+              challenges={challenges}
+              categoryClicked={categoryClicked}
+            />
           </div>
         )}
       </div>

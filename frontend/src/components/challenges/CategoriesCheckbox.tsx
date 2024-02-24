@@ -1,9 +1,20 @@
+import { useState } from "react";
 import CategoryCheckbox from "./CategoryCheckbox";
 import { useMediaQuery } from "react-responsive";
+import { useAppSelector } from "@/redux/hooks";
 
-type Props = { challenges: any };
+type Props = {
+  challenges: any;
+  setCategoryCliked: any;
+  categoryClicked: string;
+};
 
-export default function CategoriesCheckbox({ challenges }: Props) {
+export default function CategoriesCheckbox({
+  challenges,
+  setCategoryCliked,
+  categoryClicked,
+}: Props) {
+  const { user } = useAppSelector((state) => state.user);
   const isScreenBelow1050px = useMediaQuery({
     query: "(max-width: 1050px)",
   });
@@ -15,9 +26,23 @@ export default function CategoriesCheckbox({ challenges }: Props) {
 
   // Step 2: Count the number of challenges in each category
   const categoryCounts: { [category: string]: number } = {};
+
+  // Step 3: Count the number of challenges solved by the user in each category
+  const userCategoryCounts: { [category: string]: number } = {};
+
   challenges.forEach((challenge: any) => {
     categoryCounts[challenge.category] =
       (categoryCounts[challenge.category] || 0) + 1;
+
+    // Check if the user has solved this challenge
+    if (challenge.solves && user) {
+      challenge.solves.forEach((solve: any) => {
+        if (solve.user._id === user._id) {
+          userCategoryCounts[challenge.category] =
+            (userCategoryCounts[challenge.category] || 0) + 1;
+        }
+      });
+    }
   });
 
   return (
@@ -29,6 +54,11 @@ export default function CategoriesCheckbox({ challenges }: Props) {
               key={i}
               categoryName={category as string}
               challengesNumber={categoryCounts[category as string] || 0}
+              solvedChallengesNumber={
+                userCategoryCounts[category as string] || 0
+              }
+              setCategoryCliked={setCategoryCliked}
+              categoryClicked={categoryClicked}
             />
           ))}
         </div>
@@ -39,6 +69,11 @@ export default function CategoriesCheckbox({ challenges }: Props) {
               key={i}
               categoryName={category as string}
               challengesNumber={categoryCounts[category as string] || 0}
+              solvedChallengesNumber={
+                userCategoryCounts[category as string] || 0
+              }
+              setCategoryCliked={setCategoryCliked}
+              categoryClicked={categoryClicked}
             />
           ))}
         </div>
