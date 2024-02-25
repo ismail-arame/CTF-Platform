@@ -26,15 +26,3 @@ export default function CategoriesContainer({
     </>
   );
 }
-
-{
-  /* <>
-<Category categoryName="Pwn" challenges={challenges} />;
-<Category categoryName="Crypto" challenges={challenges} />;
-<Category categoryName="Web" challenges={challenges} />;
-<Category categoryName="Rev" challenges={challenges} />;
-<Category categoryName="Misc" challenges={challenges} />;
-<Category categoryName="Forensics" challenges={challenges} />;
-<Category categoryName="Malware Analysis" challenges={challenges} />;
-</> */
-}

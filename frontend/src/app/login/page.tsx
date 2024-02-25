@@ -87,7 +87,7 @@ export default function Login({}: Props) {
   });
 
   return (
-    <div className="h-screen w-screen bg-[#1a1c22] overflow-y-hidden">
+    <div className="min-h-screen w-screen bg-[#1a1c22] overflow-y-hidden">
       <div className="max-w-[1366px] mx-auto">
         {/* Navbar */}
         <Navbar lato={lato} />

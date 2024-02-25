@@ -1,5 +1,6 @@
 import { useMediaQuery } from "react-responsive";
 import { Chakra_Petch, Sansita } from "next/font/google";
+import { FaCheck } from "react-icons/fa";
 
 type Props = {
   categoryName: string;
@@ -29,7 +30,9 @@ export default function CategoryCheckbox({
         className={`${
           !isScreenBelow700px ? "h-[26px] w-[26px]" : "h-[22px] w-[22px]"
         } rounded-md border-2 border-[#68C8] mr-2 cursor-pointer ${
-          categoryClicked === categoryName ? "bg-[#68c8]" : ""
+          categoryClicked === categoryName
+            ? "transition-all duration-100 ease bg-[#68C8]"
+            : ""
         }`}
         onClick={() => {
           if (categoryName === categoryClicked) {
@@ -39,7 +42,17 @@ export default function CategoryCheckbox({
           }
           console.log("category : ", categoryName);
         }}
-      ></div>
+      >
+        {categoryName === categoryClicked && (
+          <div
+            className={`flex justify-center items-center transform ${
+              !isScreenBelow700px ? "translate-y-[60%]" : "translate-y-[57%]"
+            }`}
+          >
+            <FaCheck size={!isScreenBelow700px ? 9 : 8} color="#fff" />
+          </div>
+        )}
+      </div>
       <div
         className={`${sansita.className} font-semibold text-white ${
           !isScreenBelow700px ? "text-[16px]" : "text-[14px]"

@@ -103,7 +103,7 @@ export default function Register({}: Props) {
   });
 
   return (
-    <div className="h-full w-screen bg-[#1a1c22]">
+    <div className="min-h-screen w-screen bg-[#1a1c22]">
       <div className="max-w-[1366px] mx-auto">
         {/* Navbar */}
         <Navbar lato={lato} />
