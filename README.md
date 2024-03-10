@@ -19,3 +19,13 @@ DATABASE_URL=mongodb+srv://username:password@cluster0.bd441vd.mongodb.net/   #(c
 DEFAULT_PICTURE=https://res.cloudinary.com/dkd5jblv5/image/upload/v1675976806/Default_ProfilePicture_gjngnb.png
 ACCESS_TOKEN_SECRET=dpUr3rSW2ShkmMYTjZx57nsPbevLWgnjLqvvbtIO
 REFRESH_TOKEN_SECRET=aUXDBHCwFvKUwunkujh8kJqq3RQp8bxmMJ7OF8Eb
+
+## Running Docker Container : 
+
+```bash
+sudo docker build -t ctf-platform .
+```
+
+```bash
+sudo docker run -p 8000:8000 -p 80:80 -d ctf-platform
+```
