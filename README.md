@@ -1,4 +1,4 @@
-to run docker locally you will to set envirenment varaibles in both frontend and backend
+to run docker locally you have to set envirenment varaibles in both frontend and backend
 
 ## Frontend : 
 
