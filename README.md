@@ -1,4 +1,8 @@
-to run docker locally you have to set envirenment varaibles in both frontend and backend
+## this project is built using :  
+
+MERN stack (Mongodb, Express, React, Nodejs) and nextjs for server side rendering and typescript for type checking 
+
+to run the platform localy we will be using docker, you have to set envirenment varaibles in both frontend and backend in order to make it work perfectly.
 
 ## Frontend : 
 
@@ -15,7 +19,7 @@ and set this in its content:
 
 PORT=8000
 NODE_ENV=development (production in case of running it in production server)
-DATABASE_URL=mongodb+srv://username:password@cluster0.bd441vd.mongodb.net/   #(connect to you mongodb atlas account and get a DATABASE_URL)
+DATABASE_URL=mongodb+srv://username:password@cluster0.bd441vd.mongodb.net/   #(connect to your mongodb atlas account and get a DATABASE_URL)
 DEFAULT_PICTURE=https://res.cloudinary.com/dkd5jblv5/image/upload/v1675976806/Default_ProfilePicture_gjngnb.png
 ACCESS_TOKEN_SECRET=dpUr3rSW2ShkmMYTjZx57nsPbevLWgnjLqvvbtIO
 REFRESH_TOKEN_SECRET=aUXDBHCwFvKUwunkujh8kJqq3RQp8bxmMJ7OF8Eb
