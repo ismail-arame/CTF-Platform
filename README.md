@@ -1,6 +1,6 @@
 ## this project is built using :  
 
-MERN stack (Mongodb, Express, React, Nodejs) and nextjs for server side rendering and typescript for type checking 
+`MERN stack` (Mongodb, Express, React, Nodejs) , `nextjs` for server side rendering and `typescript` for type checking 
 
 to run the platform localy we will be using docker, you have to set envirenment varaibles in both frontend and backend in order to make it work perfectly.
 
