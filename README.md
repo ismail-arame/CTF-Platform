@@ -1,6 +1,6 @@
 ## this project is built using :  
 
-`MERN stack` (Mongodb, Express, React, Nodejs) , `nextjs` for server side rendering and `typescript` for type checking, `Docker` for running the platform in a container and `authentication` is done using `JWT` (Json Web Token)
+`MERN stack` (Mongodb, Express, React, Nodejs) , `nextjs` for server side rendering and `typescript` for type checking, `authentication` is done using `JWT` (Json Web Token) and `Docker` for running the platform in a container.
 
 to run the platform localy we will be using docker, you have to set envirenment varaibles in both frontend and backend in order to make it work perfectly.
 
