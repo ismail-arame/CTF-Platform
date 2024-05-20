@@ -33,3 +33,32 @@ sudo docker build -t ctf-platform .
 ```bash
 sudo docker run -p 8000:8000 -p 80:80 -d ctf-platform
 ```
+# Platform Design : 
+
+### Challenges Page : 
+
+[![1.jpg](https://i.postimg.cc/gjWByDd3/1.jpg)](https://postimg.cc/7GKVwS5L)
+
+### Scoreboard Page : 
+
+[![2.jpg](https://i.postimg.cc/HsW6pjLW/2.jpg)](https://postimg.cc/3W6X18pz)
+
+### Home Page : 
+
+[![3.jpg](https://i.postimg.cc/RZydQRLq/3.jpg)](https://postimg.cc/v475G5jd)
+
+### Challenges Solved by competitor Page : 
+
+[![4.jpg](https://i.postimg.cc/zBSkN1ZR/4.jpg)](https://postimg.cc/N9FX8S0g)
+
+### List of Users Page : 
+
+[![5.jpg](https://i.postimg.cc/xj5PFY3w/5.jpg)](https://postimg.cc/mhcMtvqj)
+
+### Register Page : 
+
+[![6.jpg](https://i.postimg.cc/Gm8J2DnR/6.jpg)](https://postimg.cc/FYvJC7KC)
+
+### Login Page : 
+
+[![7.jpg](https://i.postimg.cc/d1v84SkQ/7.jpg)](https://postimg.cc/VSGrNgW2)
