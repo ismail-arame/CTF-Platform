@@ -1,9 +1,12 @@
+Plateforme ctf dévelopée pour une compétition en ligne, visant à résoudre des défis de cybersécurité, Cet événement rassemble plus de 130 étudiants issus de la majorité des universités marocaines
+
+![image](https://github.com/user-attachments/assets/0b0f43f6-94b8-4483-a8bd-8f4716a814fe)
+
 ## this project is built using :  
 
 `MERN stack` (Mongodb, Express, React, Nodejs) , `nextjs` for server side rendering and `typescript` for type checking, `authentication` is done using `JWT` (Json Web Token) and `Docker` for running the platform in a container.
 
 # Platform Design : 
-
 
 ### Challenges Page : 
 
