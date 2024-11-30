@@ -2,6 +2,37 @@
 
 `MERN stack` (Mongodb, Express, React, Nodejs) , `nextjs` for server side rendering and `typescript` for type checking, `authentication` is done using `JWT` (Json Web Token) and `Docker` for running the platform in a container.
 
+# Platform Design : 
+
+
+### Challenges Page : 
+
+![image 1](https://github.com/user-attachments/assets/76d26e27-38bc-4cf6-b6a8-c141f8b09606)
+
+### Scoreboard Page : 
+
+![image 2](https://github.com/user-attachments/assets/934cab08-06ab-416c-a4f3-343c11cb5c59)
+
+### Home Page : 
+
+![image 3](https://github.com/user-attachments/assets/05d62ee6-fd24-47d2-b359-7717e764abc1)
+
+### Challenges Solved by competitor Page : 
+
+![4](https://github.com/user-attachments/assets/c30d275d-a913-405c-9b38-228c056f8714)
+
+### List of Users Page : 
+
+![5](https://github.com/user-attachments/assets/759e0a44-af37-4b40-8cb6-48d92dd90243)
+
+### Register Page : 
+
+![6](https://github.com/user-attachments/assets/1c6604f8-b473-4fd3-a90e-3fb52aa5e81d)
+
+### Login Page : 
+
+![7](https://github.com/user-attachments/assets/d28aeaea-905c-4e7f-87f2-8fa3b9efd8cf)
+
 to run the platform localy we will be using docker, you have to set envirenment varaibles in both frontend and backend in order to make it work perfectly.
 
 ## Frontend : 
@@ -33,32 +64,3 @@ sudo docker build -t ctf-platform .
 ```bash
 sudo docker run -p 8000:8000 -p 80:80 -d ctf-platform
 ```
-# Platform Design : 
-
-### Challenges Page : 
-
-[![1.jpg](https://i.postimg.cc/gjWByDd3/1.jpg)](https://postimg.cc/7GKVwS5L)
-
-### Scoreboard Page : 
-
-[![2.jpg](https://i.postimg.cc/HsW6pjLW/2.jpg)](https://postimg.cc/3W6X18pz)
-
-### Home Page : 
-
-[![3.jpg](https://i.postimg.cc/RZydQRLq/3.jpg)](https://postimg.cc/v475G5jd)
-
-### Challenges Solved by competitor Page : 
-
-[![4.jpg](https://i.postimg.cc/zBSkN1ZR/4.jpg)](https://postimg.cc/N9FX8S0g)
-
-### List of Users Page : 
-
-[![5.jpg](https://i.postimg.cc/xj5PFY3w/5.jpg)](https://postimg.cc/mhcMtvqj)
-
-### Register Page : 
-
-[![6.jpg](https://i.postimg.cc/Gm8J2DnR/6.jpg)](https://postimg.cc/FYvJC7KC)
-
-### Login Page : 
-
-[![7.jpg](https://i.postimg.cc/d1v84SkQ/7.jpg)](https://postimg.cc/VSGrNgW2)
